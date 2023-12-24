@@ -52,8 +52,8 @@ struct ExerciseEditorView: View {
 				.navigationTitle(type.description)
 				.toolbar {
 					ToolbarItem(placement: .topBarTrailing) {
-						Button("Continue") {
-							vm.navigatToSettings()
+						NavigationLink("Continue") {
+							settings
 						}
 					}
 				}
@@ -62,9 +62,6 @@ struct ExerciseEditorView: View {
 						Text(errorMessage)
 					}
 				}
-			}
-			.navigationDestination(isPresented: $vm.showSettings) {
-				settings
 			}
 		}
 		.onAppear {

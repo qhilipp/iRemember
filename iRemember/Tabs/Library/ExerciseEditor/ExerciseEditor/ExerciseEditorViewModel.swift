@@ -18,7 +18,6 @@ class ExerciseEditorViewModel {
 	var scrollProxy: ScrollViewProxy!
 	@ObservationIgnored var delegate: ExerciseEditorDelegate?
 	var missingInformationErrorMessage: String?
-	var showSettings = false
 	
 	var canNavigate: Bool {
 		!exercise.name.isEmpty
@@ -52,16 +51,6 @@ class ExerciseEditorViewModel {
 		delegate?.add()
 		learnlist.sortedExercises.append(exercise)
 		dismissAction()
-	}
-	
-	func navigatToSettings() {
-		if canContinue {
-			withAnimation {
-				showSettings = true
-			}
-		} else {
-			showMissingInformationError = true
-		}
 	}
 	
 	func scrollTo<H: Hashable>(_ id: H, anchor: UnitPoint? = nil) {
