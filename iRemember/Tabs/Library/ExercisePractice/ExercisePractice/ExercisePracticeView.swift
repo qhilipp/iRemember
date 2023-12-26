@@ -26,8 +26,6 @@ struct ExercisePracticeView: View {
 					.opacity(0)
 			}
 			ctaButton
-				.background(Color(uiColor: .systemBackground))
-				.clipShape(.rect(cornerRadius: 10))
 				.padding(.horizontal)
 				.frame(maxWidth: .infinity)
 		}

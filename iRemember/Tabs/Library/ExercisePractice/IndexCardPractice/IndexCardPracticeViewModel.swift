@@ -16,7 +16,8 @@ class IndexCardPracticeViewModel: ExercisePracticeDelegate {
 	var vm: ExercisePracticeViewModel
 	var frontRotation = 0.0
 	var backRotation = 90.0
-	private let durationAndDelay = 0.5
+	var rating: Rating? = nil
+	private let durationAndDelay = 0.25
 	
 	init(indexCard: IndexCard, vm: ExercisePracticeViewModel) {
 		self._indexCard = indexCard
@@ -38,17 +39,7 @@ class IndexCardPracticeViewModel: ExercisePracticeDelegate {
 	}
 	
 	func evaluateCorrectness() -> Double {
-		1
+		rating?.correctness ?? 0
 	}
 	
-}
-
-enum IndexCardRating: String, Identifiable, CaseIterable, Hashable {
-	case none
-	case wrong
-	case meh
-	case ok
-	case correct
-	
-	var id: Self { self }
 }

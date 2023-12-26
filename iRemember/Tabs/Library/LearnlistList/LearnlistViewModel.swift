@@ -33,6 +33,8 @@ class LearnlistViewModel {
 	func delete(indexSet: IndexSet) {
 		for index in indexSet {
 			GlobalManager.shared.context.delete(learnlists[index])
+		}
+		for index in indexSet {
 			learnlists.remove(at: index)
 		}
 	}

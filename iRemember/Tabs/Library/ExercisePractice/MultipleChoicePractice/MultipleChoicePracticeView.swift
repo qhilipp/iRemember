@@ -32,15 +32,15 @@ struct MultipleChoicePracticeView: View {
 		LabeledImage(vm.multipleChoiceExercise.image, alignment: .top) {
 			Text(vm.multipleChoiceExercise.question)
 				.font(.system(.title, design: .rounded, weight: .heavy))
-			if let feedback = vm.feedback {
+			if let feedback = vm.rating {
 				switch feedback {
-				case .allWrong:
+				case .wrong:
 					Text("All wrong")
 						.foregroundStyle(.secondary)
-				case .allCorrect:
+				case .correct:
 					Text("All correct")
 						.gradientForeground()
-				case .partial:
+				default:
 					HStack(spacing: 0) {
 						Text("\(vm.correctGuesses) correct")
 							.gradientForeground()

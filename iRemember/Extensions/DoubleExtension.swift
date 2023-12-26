@@ -14,4 +14,14 @@ extension Double {
 		return (self * p).rounded() / p
 	}
 	
+	var rating: Rating {
+		switch self {
+		case Rating.wrong.interval: .wrong
+		case Rating.ok.interval: .ok
+		case Rating.good.interval: .good
+		case Rating.correct.interval: .correct
+		default: .wrong
+		}
+	}
+	
 }

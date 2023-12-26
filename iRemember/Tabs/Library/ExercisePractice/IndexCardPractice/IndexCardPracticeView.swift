@@ -10,7 +10,6 @@ import SwiftUI
 struct IndexCardPracticeView: View {
 	
 	@State var vm: IndexCardPracticeViewModel
-	@State var rating: IndexCardRating = .none
 	
 	var frontRotation: Double {
 		vm.vm.isRevealed ? 0 : 90
@@ -39,34 +38,34 @@ struct IndexCardPracticeView: View {
 			Spacer()
 			if vm.vm.isRevealed {
 				HStack {
-					ForEach(IndexCardRating.allCases) { rating in
-						if rating != .none {
-							ratingButton(for: rating)
-						}
+					ForEach(Rating.allCases) { rating in
+						ratingButton(for: rating)
 					}
 				}
-//				Picker("Rating", selection: $rating) {
-//					ForEach(IndexCardRating.allCases) { rating in
-//						if rating != .none {
-//							Text(rating.rawValue)
-//								.tag(rating)
-//						}
-//					}
-//				}
-//				.pickerStyle(.segmented)
 			}
 		}
 		.padding(.horizontal)
     }
 	
 	@ViewBuilder
-	func ratingButton(for rating: IndexCardRating) -> some View {
-		Button(rating.rawValue) {
-			self.rating = rating
+	func ratingButton(for rating: Rating) -> some View {
+		Button {
+			withAnimation {
+				vm.rating = rating
+			}
+		} label: {
+			Text(rating.rawValue)
+				.bold()
+				.frame(maxWidth: .infinity)
 		}
-		.frame(maxWidth: .infinity)
-		.tint(.green)
-		.bold()
+		.buttonStyle(.bordered)
+		.tint(rating.color)
+		.background {
+			if vm.rating == rating {
+				RoundedRectangle(cornerRadius: 5)
+					.stroke(rating.color, lineWidth: 3)
+			}
+		}
 	}
 	
 	@ViewBuilder

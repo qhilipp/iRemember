@@ -89,3 +89,11 @@ extension [PracticeSession] {
 	}
 	
 }
+
+extension [Rating] {
+	
+	var colors: [Color] {
+		map { $0.color }
+	}
+	
+}
