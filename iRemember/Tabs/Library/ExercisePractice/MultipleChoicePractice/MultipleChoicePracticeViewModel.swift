@@ -28,7 +28,7 @@ class MultipleChoicePracticeViewModel: ExercisePracticeDelegate {
 			vm.currentStatistic.timeInformation.registerActionTime(for: index)
 		}
 	}
-	var feedback: Feedback?
+	var rating: Rating?
 	
 	var correctGuesses: Int {
 		var correctGuesses = 0
@@ -77,14 +77,7 @@ class MultipleChoicePracticeViewModel: ExercisePracticeDelegate {
 	}
 	
 	func evaluateCorrectness() -> Double {
-		if correctGuesses == guesses.count {
-			feedback = .allCorrect
-		} else if correctGuesses == 0 {
-			feedback = .allWrong
-		} else {
-			feedback = .partial
-		}
-		
+		rating = Double(correctGuesses / guesses.count).rating
 		return Double(correctGuesses) / Double(multipleChoiceExercise.answers.count)
 	}
 	

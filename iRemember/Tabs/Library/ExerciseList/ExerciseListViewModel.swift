@@ -40,8 +40,9 @@ class ExerciseListViewModel {
 	}
 	
 	func delete(indexSet: IndexSet) {
-		if var exercises = learnlist.exercises {
-			exercises.remove(atOffsets: indexSet)
+		guard let exercises = learnlist.exercises else { return }
+		for index in indexSet {
+			GlobalManager.shared.context.delete(exercises[index])
 		}
 	}
 	

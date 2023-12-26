@@ -12,9 +12,6 @@ import SwiftUI
 @Model
 final class Statistic: Identifiable, Hashable {
 	
-	@Transient static let correctnessThreshold = 0.99
-	@Transient static let incorrectnessThreshold = 0.4
-	
 	@Attribute(.unique) var id: UUID
 	var exercise: Exercise! = nil
 	var timeInformation: TimeInformation
@@ -26,27 +23,11 @@ final class Statistic: Identifiable, Hashable {
 		return correctness * 100.0 / timeInformation.totalTime
 	}
 	
-	var correctnessType: CorrectnessType {
-		if correctness < Self.incorrectnessThreshold {
-			return .incorrect
-		}
-		if correctness < Self.correctnessThreshold {
-			return .partiallyCorrect
-		}
-		return .correct
-	}
-	
 	init() {
 		self.id = UUID()
 		self.timeInformation = TimeInformation()
 	}
 	
-}
-
-enum CorrectnessType: String, CaseIterable {
-	case correct = "Correct"
-	case partiallyCorrect = "Partially correct"
-	case incorrect = "Incorrect"
 }
 
 extension Statistic {
@@ -68,18 +49,6 @@ extension Statistic {
 			default: break
 			}
 		}
-	}
-	
-	var isCorrect: Bool {
-		correctnessType == .correct
-	}
-	
-	var isParitallyCorrect: Bool {
-		correctnessType == .partiallyCorrect
-	}
-	
-	var isIncorrect: Bool {
-		correctnessType == .incorrect
 	}
 	
 	var timeOut: Bool {
