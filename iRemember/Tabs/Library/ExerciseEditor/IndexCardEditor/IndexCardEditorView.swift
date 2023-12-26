@@ -1,5 +1,5 @@
 //
-//  IndexCardEditor.swift
+//  IndexCardEditorView.swift
 //  iRemember
 //
 //  Created by Privat on 14.10.23.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct IndexCardEditor: View {
+struct IndexCardEditorView: View {
 	
-	@State var vm: IndexCardViewModel
+	@State var vm: IndexCardEditorViewModel
 	
 	init(vm: ExerciseEditorViewModel) {
-		self._vm = State(initialValue: IndexCardViewModel(vm: vm))
+		self._vm = State(initialValue: IndexCardEditorViewModel(vm: vm))
 	}
 	
     var body: some View {

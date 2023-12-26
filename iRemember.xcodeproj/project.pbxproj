@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A104C4E92ADAA7F70086F581 /* ImageCacheMacro in Frameworks */ = {isa = PBXBuildFile; productRef = A104C4E82ADAA7F70086F581 /* ImageCacheMacro */; };
-		A104C5062ADAD63F0086F581 /* IndexCardEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104C5052ADAD63F0086F581 /* IndexCardEditor.swift */; };
-		A104C5082ADAD6480086F581 /* IndexCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104C5072ADAD6480086F581 /* IndexCardViewModel.swift */; };
+		A104C5062ADAD63F0086F581 /* IndexCardEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104C5052ADAD63F0086F581 /* IndexCardEditorView.swift */; };
+		A104C5082ADAD6480086F581 /* IndexCardEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104C5072ADAD6480086F581 /* IndexCardEditorViewModel.swift */; };
 		A1083FDC2AAF814200A4CF13 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1083FDB2AAF814200A4CF13 /* StopWatch.swift */; };
 		A10C04D22A72F45500E144A7 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10C04D12A72F45500E144A7 /* ListItemView.swift */; };
 		A10C04D52A73066A00E144A7 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10C04D42A73066A00E144A7 /* FontExtension.swift */; };
@@ -74,6 +74,8 @@
 		A1E6BFBD2A719850005E33D0 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6BFBC2A719850005E33D0 /* ViewExtension.swift */; };
 		A1EEB0B82AA68C3E00F25630 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB0B72AA68C3E00F25630 /* Styles.swift */; };
 		A1EEB0BA2AA68D7500F25630 /* FloatingPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB0B92AA68D7500F25630 /* FloatingPointExtension.swift */; };
+		A1FAD7F62B389B660085B316 /* IndexCardPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FAD7F52B389B660085B316 /* IndexCardPracticeView.swift */; };
+		A1FAD7F82B389B700085B316 /* IndexCardPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FAD7F72B389B700085B316 /* IndexCardPracticeViewModel.swift */; };
 		A1FFFA6E2A9E9B5200E1D031 /* PracticeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFFA6D2A9E9B5200E1D031 /* PracticeSession.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,8 +97,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A104C5052ADAD63F0086F581 /* IndexCardEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardEditor.swift; sourceTree = "<group>"; };
-		A104C5072ADAD6480086F581 /* IndexCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardViewModel.swift; sourceTree = "<group>"; };
+		A104C5052ADAD63F0086F581 /* IndexCardEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardEditorView.swift; sourceTree = "<group>"; };
+		A104C5072ADAD6480086F581 /* IndexCardEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardEditorViewModel.swift; sourceTree = "<group>"; };
 		A1083FDB2AAF814200A4CF13 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		A10C04D12A72F45500E144A7 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		A10C04D42A73066A00E144A7 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
@@ -165,6 +167,8 @@
 		A1E6BFBC2A719850005E33D0 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		A1EEB0B72AA68C3E00F25630 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		A1EEB0B92AA68D7500F25630 /* FloatingPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointExtension.swift; sourceTree = "<group>"; };
+		A1FAD7F52B389B660085B316 /* IndexCardPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardPracticeView.swift; sourceTree = "<group>"; };
+		A1FAD7F72B389B700085B316 /* IndexCardPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardPracticeViewModel.swift; sourceTree = "<group>"; };
 		A1FFFA6D2A9E9B5200E1D031 /* PracticeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,8 +201,8 @@
 		A104C5042ADAD62D0086F581 /* IndexCardEditor */ = {
 			isa = PBXGroup;
 			children = (
-				A104C5052ADAD63F0086F581 /* IndexCardEditor.swift */,
-				A104C5072ADAD6480086F581 /* IndexCardViewModel.swift */,
+				A104C5052ADAD63F0086F581 /* IndexCardEditorView.swift */,
+				A104C5072ADAD6480086F581 /* IndexCardEditorViewModel.swift */,
 			);
 			path = IndexCardEditor;
 			sourceTree = "<group>";
@@ -251,6 +255,7 @@
 			children = (
 				A14F889E2A80EE85007F4927 /* ExercisePractice */,
 				A10DE1992A7061CF00A3DA2C /* MultipleChoicePractice */,
+				A1FAD7F42B389B470085B316 /* IndexCardPractice */,
 			);
 			path = ExercisePractice;
 			sourceTree = "<group>";
@@ -551,6 +556,15 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		A1FAD7F42B389B470085B316 /* IndexCardPractice */ = {
+			isa = PBXGroup;
+			children = (
+				A1FAD7F52B389B660085B316 /* IndexCardPracticeView.swift */,
+				A1FAD7F72B389B700085B316 /* IndexCardPracticeViewModel.swift */,
+			);
+			path = IndexCardPractice;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -709,7 +723,7 @@
 				A12AD5932AC77A1C00D26FF3 /* CorrelationViewModel.swift in Sources */,
 				A1083FDC2AAF814200A4CF13 /* StopWatch.swift in Sources */,
 				A1EEB0B82AA68C3E00F25630 /* Styles.swift in Sources */,
-				A104C5082ADAD6480086F581 /* IndexCardViewModel.swift in Sources */,
+				A104C5082ADAD6480086F581 /* IndexCardEditorViewModel.swift in Sources */,
 				A1A17D872A8A5A4E00ED7011 /* MultipleChoicePracticeViewModel.swift in Sources */,
 				A12AD59C2AC7861500D26FF3 /* ExerciseStatisticsViewModel.swift in Sources */,
 				A12AD59A2AC7860A00D26FF3 /* ExerciseStatisticsView.swift in Sources */,
@@ -736,12 +750,13 @@
 				A14E633B2A75B552007274AE /* LearnlistViewModel.swift in Sources */,
 				A1EEB0BA2AA68D7500F25630 /* FloatingPointExtension.swift in Sources */,
 				A1CDDD372AA6251E00122DE3 /* DistributionViewModel.swift in Sources */,
-				A104C5062ADAD63F0086F581 /* IndexCardEditor.swift in Sources */,
+				A104C5062ADAD63F0086F581 /* IndexCardEditorView.swift in Sources */,
 				A1DBFBC12AC0ADC700DEE3E8 /* DivisionViewModel.swift in Sources */,
 				A1CDDD352AA6251400122DE3 /* DistributionView.swift in Sources */,
 				A10DE1712A6F0BE600A3DA2C /* ExerciseEditorView.swift in Sources */,
 				A1E01FF62A6BED6000C5599F /* iRememberApp.swift in Sources */,
 				A1E0202E2A6BF7B400C5599F /* ExerciseListViewModel.swift in Sources */,
+				A1FAD7F62B389B660085B316 /* IndexCardPracticeView.swift in Sources */,
 				A12AD5912AC77A1300D26FF3 /* CorrelationView.swift in Sources */,
 				A12AD5A92ACA04BA00D26FF3 /* LibraryLandingPageViewModel.swift in Sources */,
 				A119BCD92A82372700B31626 /* SessionStatisticsViewModel.swift in Sources */,
@@ -749,6 +764,7 @@
 				A1DACD752AA0F97D0006F66C /* ArrayExtension.swift in Sources */,
 				A138B63D2A8779CD00D71050 /* RollingText.swift in Sources */,
 				A12AD5972AC77ED200D26FF3 /* Point.swift in Sources */,
+				A1FAD7F82B389B700085B316 /* IndexCardPracticeViewModel.swift in Sources */,
 				A14E63392A750935007274AE /* PhotoPicker.swift in Sources */,
 				A119BCD72A82370B00B31626 /* SessionStatisticsView.swift in Sources */,
 				A1E01FFA2A6BED6000C5599F /* ContentView.swift in Sources */,

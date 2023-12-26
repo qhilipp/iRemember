@@ -37,25 +37,30 @@ final class Exercise: Identifiable, Hashable {
 	@Attribute(.unique) var id: UUID
 	var name: String = ""
 	var creationDate: Date
-	@Relationship var multipleChoiceExercise: MultipleChoice?
+	@Relationship var multipleChoice: MultipleChoice?
+	@Relationship var indexCard: IndexCard?
 	var score: Double = 0
 	var hasTimeLimitation: Bool = false
 	var timeLimitation: TimeInterval = 60
 	
 	var type: ExerciseType {
 		get {
-			if let multipleChoiceExercise {
-				return .multipleChoice(multipleChoiceExercise)
+			if let multipleChoice {
+				.multipleChoice(multipleChoice)
+			} else if let indexCard {
+				.indexCard(indexCard)
 			} else {
-				return .none
+				.none
 			}
 		}
 		
 		set {
-			multipleChoiceExercise = nil
+			multipleChoice = nil
 			switch newValue {
-			case .multipleChoice(let multipleChoiceExercise):
-				self.multipleChoiceExercise = multipleChoiceExercise
+			case .multipleChoice(let multipleChoice):
+				self.multipleChoice = multipleChoice
+			case .indexCard(let indexCard):
+				self.indexCard = indexCard
 			default: break
 			}
 		}

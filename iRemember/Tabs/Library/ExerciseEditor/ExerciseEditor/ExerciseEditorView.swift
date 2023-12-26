@@ -93,7 +93,7 @@ struct ExerciseEditorView: View {
 	func specificEditor(for type: ExerciseType) -> some View {
 		switch(type) {
 		case .multipleChoice: MultipleChoiceEditorView(vm: vm)
-		case .indexCard: IndexCardEditor(vm: vm)
+		case .indexCard: IndexCardEditorView(vm: vm)
 		case .number: Text("Number")
 		case .vocabulary: Text("Vocabulary")
 		case .location: Text("Location")

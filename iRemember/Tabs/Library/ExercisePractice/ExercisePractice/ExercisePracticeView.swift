@@ -17,16 +17,21 @@ struct ExercisePracticeView: View {
 	}
 	
 	var body: some View {
-		ScrollViewReader { proxy in
-			ScrollView {
-				VStack {
-					content
-						.id(vm.currentExercise.id)
-					ctaButton
-				}
-				.padding()
+		ZStack(alignment: .bottom) {
+			VStack {
+				content
+					.id(vm.currentExercise.id)
+				ctaButton
+					.disabled(true)
+					.opacity(0)
 			}
+			ctaButton
+				.background(Color(uiColor: .systemBackground))
+				.clipShape(.rect(cornerRadius: 10))
+				.padding(.horizontal)
+				.frame(maxWidth: .infinity)
 		}
+		.toolbar(.hidden, for: .tabBar)
 		.navigationTitle(vm.currentExercise.name)
 		.navigationBarTitleDisplayMode(.inline)
 		.toolbar {
@@ -93,10 +98,10 @@ struct ExercisePracticeView: View {
 	
 	@ViewBuilder
 	var content: some View {
-		if let multipleChoice = vm.currentExercise as? MultipleChoice {
-			MultipleChoicePracticeView(for: multipleChoice, vm: vm)
-		} else {
-			Text("Coming soon :)")
+		switch vm.currentExercise.type {
+		case let .multipleChoice(multipleChoice): MultipleChoicePracticeView(for: multipleChoice!, vm: vm)
+		case let .indexCard(indexCard): IndexCardPracticeView(for: indexCard!, vm: vm)
+		default: Text("Comming soon :)")
 		}
 	}
 	

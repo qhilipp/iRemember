@@ -62,7 +62,6 @@ struct MultipleChoiceEditorView: View {
 						}
 						PhotoPicker(answer.imageData) {
 							Image(systemName: "photo")
-								.resizable()
 						}
 					}
 				}

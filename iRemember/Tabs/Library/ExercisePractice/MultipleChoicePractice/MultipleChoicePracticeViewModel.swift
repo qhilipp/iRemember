@@ -26,7 +26,6 @@ class MultipleChoicePracticeViewModel: ExercisePracticeDelegate {
 				}
 			}
 			vm.currentStatistic.timeInformation.registerActionTime(for: index)
-			print(vm.currentStatistic.timeInformation.actionTimes)
 		}
 	}
 	var feedback: Feedback?

@@ -1,5 +1,5 @@
 //
-//  IndexCardViewModel.swift
+//  IndexCardEditorViewModel.swift
 //  iRemember
 //
 //  Created by Privat on 14.10.23.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Observable
-class IndexCardViewModel: ExerciseEditorDelegate {
+class IndexCardEditorViewModel: ExerciseEditorDelegate {
 	
 	var indexCard: IndexCard = IndexCard()
 	var front: IndexCardPage = IndexCardPage()
@@ -19,6 +19,7 @@ class IndexCardViewModel: ExerciseEditorDelegate {
 	
 	init(vm: ExerciseEditorViewModel) {
 		self.vm = vm
+		GlobalManager.shared.context.insert(indexCard)
 	}
 	
 	func setup() {

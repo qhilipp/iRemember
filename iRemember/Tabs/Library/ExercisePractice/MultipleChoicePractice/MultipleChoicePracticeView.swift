@@ -17,8 +17,14 @@ struct MultipleChoicePracticeView: View {
 	}
 	
 	var body: some View {
-		header
-		answers
+		ScrollView {
+			VStack {
+				header
+				answers
+			}
+			.clipShape(.rect(cornerRadius: 10))
+			.padding([.leading, .trailing])
+		}
 	}
 	
 	@ViewBuilder

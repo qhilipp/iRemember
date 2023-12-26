@@ -35,7 +35,6 @@ struct ListItemView: View {
 					.frame(width: 55, height: 55)
 					.foregroundStyle(Color.accentColor)
 					.padding(.horizontal, 2.5)
-			default: EmptyView()
 			}
 			HStack {
 				VStack(alignment: .leading) {
