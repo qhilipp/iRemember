@@ -1,5 +1,5 @@
 //
-//  learnlistListView.swift
+//  LearnlistListView.swift
 //  iRemember
 //
 //  Created by Privat on 23.07.23.
@@ -22,7 +22,7 @@ struct LearnlistListView: View {
 						ListItemView(itemType: .learnlist(learnlist))
 					}
 				}
-				.onDelete(perform: vm.delete)
+				.onDelete(perform: vm.confirmDelete(indexSet:))
 			}
 			.navigationTitle("iRemember")
 			.searchable(text: $vm.searchTerm)
@@ -45,6 +45,16 @@ struct LearnlistListView: View {
 				vm.update()
 			} content: {
 				LearnlistEditorView()
+			}
+			.confirmationDialog("Delete", isPresented: $vm.showConfirmDelete) {
+				Button("Delete only learnlist", role: .destructive) {
+					vm.delete(recursive: true)
+				}
+				Button("Also delete exercises", role: .destructive) {
+					vm.delete(recursive: false)
+				}.bold()
+			} message: {
+				Text("Do you want to delete the learnlist and all exercises in it?")
 			}
 		}
 		.onAppear {

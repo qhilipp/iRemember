@@ -14,7 +14,9 @@ class LearnlistViewModel {
 	var learnlists: [Learnlist] = []
 	var showAddLearnlist = false
 	var showError = false
+	var showConfirmDelete = false
 	var searchTerm = ""
+	var indexSetToDelete: IndexSet?
 	
 	var filteredLearnlists: [Learnlist] {
 		if searchTerm == "" {
@@ -30,13 +32,21 @@ class LearnlistViewModel {
 		learnlists = ((try? GlobalManager.shared.context.fetch(descriptor)) ?? [])
 	}
 	
-	func delete(indexSet: IndexSet) {
-		for index in indexSet {
-			GlobalManager.shared.context.delete(learnlists[index])
+	func confirmDelete(indexSet: IndexSet) {
+		showConfirmDelete = true
+		self.indexSetToDelete = indexSet
+	}
+	
+	func delete(recursive: Bool) {
+		guard let indexSetToDelete else { return }
+		if recursive {
+			for index in indexSetToDelete {
+				for exercise in learnlists[index].exercises {
+					GlobalManager.shared.context.delete(exercise)
+				}
+			}
 		}
-		for index in indexSet {
-			learnlists.remove(at: index)
-		}
+		learnlists.remove(atOffsets: indexSetToDelete)
 	}
 	
 }
