@@ -20,12 +20,12 @@ struct SessionStatisticsView: View {
     var body: some View {
 		ScrollView {
 			VStack {
-				referenceHistoryComparison
-				distribution
-				division
-				TimeDistributionView(for: vm.practiceSession)
-				CorrelationView(for: .practiceSession(vm.practiceSession, vm.historicSessions))
-				moreButton
+//				referenceHistoryComparison
+//				distribution
+//				division
+//				TimeDistributionView(for: vm.practiceSession)
+//				CorrelationView(for: .practiceSession(vm.practiceSession, vm.historicSessions))
+//				moreButton
 			}
 		}
 		.navigationBarTitleDisplayMode(.large)

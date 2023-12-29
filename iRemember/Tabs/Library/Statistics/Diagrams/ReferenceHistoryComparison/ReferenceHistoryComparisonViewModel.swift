@@ -121,7 +121,7 @@ enum TimeRange: String, CaseIterable, Identifiable {
 	case year = "Year"
 	case all = "All"
 	
-	var id: String { self.rawValue }
+	var id: Self { self }
 	
 	var date: Date {
 		switch self {

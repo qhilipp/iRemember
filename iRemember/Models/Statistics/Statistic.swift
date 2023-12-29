@@ -13,7 +13,7 @@ import SwiftUI
 final class Statistic: Identifiable, Hashable {
 	
 	@Attribute(.unique) var id: UUID
-	var exercise: Exercise! = nil
+	@Relationship(.unique, deleteRule: .nullify, inverse: \Exercise.statistics) var exercise: Exercise! = nil
 	var timeInformation: TimeInformation
 	var correctness: Double = 0
 	@Relationship var multipleChoiceStatistic: MultipleChoiceStatistic?

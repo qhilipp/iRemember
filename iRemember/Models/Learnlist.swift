@@ -19,8 +19,7 @@ final class Learnlist {
 	
 	@Attribute(.unique) var id: UUID
 	var type: LearnlistType
-	var exercises: [Exercise]?
-	var containmentRule: String = "name == 'Test'"
+	var exercises: [Exercise] = []
 	var name: String
 	var detail: String
 	var hasTimeLimitation: Bool
@@ -31,27 +30,18 @@ final class Learnlist {
 	@ImageCache
 	@Attribute(.externalStorage) var imageData: Data?
 		
-	@Transient private var exercisesCache: [Exercise]?
 	var sortedExercises: [Exercise] {
 		get {
-			switch type {
-			case .constant: exercises!.sorted(by: { $0.creationDate > $1.creationDate })
-			case .dynamic:
-				if let exercisesCache {
-					exercisesCache
-				} else {
-					fetchExercises(with: containmentRule)
-				}
-			}
+//			switch type {
+			/*case .constant: */exercises.sorted(by: { $0.creationDate > $1.creationDate })
+//			case .dynamic:
+//				exercisesCache
+//			}
 		}
 		
 		set {
 			self.exercises = newValue
 		}
-	}
-	
-	func fetchExercises(with containmentRule: String) -> [Exercise] {
-		((try? GlobalManager.shared.context.fetch(FetchDescriptor<Exercise>())) ?? []).filter { NSPredicate(format: containmentRule).evaluate(with: $0) }
 	}
 	
 	init(name: String, detail: String = "", timeLimitation: TimeInterval? = nil, perExercise: Bool = false, imageData: Data? = nil) {

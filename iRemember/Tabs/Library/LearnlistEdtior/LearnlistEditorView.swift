@@ -64,12 +64,12 @@ struct LearnlistEditorView: View {
 					TextField("Description", text: $vm.learnlist.detail, axis: .vertical)
 						.lineLimit(2...5)
 				}
-				Section {
-					Toggle("Dynamic", isOn: $vm.isDynamic)
-					if vm.isDynamic {
-						TextField("Rule", text: $vm.learnlist.containmentRule)
-					}
-				}
+//				Section {
+//					Toggle("Dynamic", isOn: $vm.isDynamic)
+//					if vm.isDynamic {
+//						TextField("Rule", text: $vm.learnlist.containmentRule)
+//					}
+//				}
 			}
 			.toolbar {
 				ToolbarItem(placement: .topBarLeading) {

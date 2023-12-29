@@ -26,6 +26,12 @@ struct ContentView: View {
 				.tabItem {
 					Label("Profile", systemImage: "person.crop.circle")
 				}
+			#if DEBUG
+			AllModelsView()
+				.tabItem {
+					Label("Debug", systemImage: "ladybug.circle")
+				}
+			#endif
 		}
 		.onAppear {
 			GlobalManager.shared.context = context

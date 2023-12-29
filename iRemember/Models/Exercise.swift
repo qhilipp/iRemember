@@ -37,6 +37,7 @@ final class Exercise: Identifiable, Hashable {
 	@Attribute(.unique) var id: UUID
 	var name: String = ""
 	var creationDate: Date
+	@Relationship(.unique, deleteRule: .cascade) var statistics: [Statistic] = []
 	@Relationship var multipleChoice: MultipleChoice?
 	@Relationship var indexCard: IndexCard?
 	var score: Double = 0

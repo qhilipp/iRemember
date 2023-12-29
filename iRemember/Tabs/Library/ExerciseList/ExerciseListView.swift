@@ -96,7 +96,7 @@ extension ExerciseListView {
 					.ignoreCell()
 			}
 			Section {
-				ForEach(vm.filteredExercises, id: \.id) { exercise in
+				ForEach(vm.learnlist.exercises, id: \.id) { exercise in
 					NavigationLink(value: PracticeSession(.queue([exercise]))) {
 						ListItemView(itemType: .exercise(exercise))
 					}
