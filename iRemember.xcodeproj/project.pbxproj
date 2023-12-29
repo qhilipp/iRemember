@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1025B542B3F71E300CA4B00 /* AllModelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1025B532B3F71E300CA4B00 /* AllModelsView.swift */; };
 		A104C4E92ADAA7F70086F581 /* ImageCacheMacro in Frameworks */ = {isa = PBXBuildFile; productRef = A104C4E82ADAA7F70086F581 /* ImageCacheMacro */; };
 		A104C5062ADAD63F0086F581 /* IndexCardEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104C5052ADAD63F0086F581 /* IndexCardEditorView.swift */; };
 		A104C5082ADAD6480086F581 /* IndexCardEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104C5072ADAD6480086F581 /* IndexCardEditorViewModel.swift */; };
@@ -97,6 +98,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A1025B532B3F71E300CA4B00 /* AllModelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllModelsView.swift; sourceTree = "<group>"; };
 		A104C5052ADAD63F0086F581 /* IndexCardEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardEditorView.swift; sourceTree = "<group>"; };
 		A104C5072ADAD6480086F581 /* IndexCardEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardEditorViewModel.swift; sourceTree = "<group>"; };
 		A1083FDB2AAF814200A4CF13 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 		A119BCD22A8236C900B31626 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				A1025B532B3F71E300CA4B00 /* AllModelsView.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				A1638D432A8570F3004F9001 /* ReferenceHistoryComparisonViewModel.swift in Sources */,
 				A10DE19B2A7061E900A3DA2C /* MultipleChoicePracticeView.swift in Sources */,
 				A1FAD7FA2B3AE2EE0085B316 /* Rating.swift in Sources */,
+				A1025B542B3F71E300CA4B00 /* AllModelsView.swift in Sources */,
 				A1E6BFBD2A719850005E33D0 /* ViewExtension.swift in Sources */,
 				A138B63B2A86D60100D71050 /* DoubleExtension.swift in Sources */,
 				A119BCDB2A82378400B31626 /* Statistic.swift in Sources */,
