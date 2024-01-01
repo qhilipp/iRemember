@@ -73,13 +73,21 @@ final class Exercise: Identifiable, Hashable {
 	}
 	
 	func matches(searchTerm: String) -> Bool {
-		if name.contains(searchTerm) || creationDate.description.contains(searchTerm) {
+		if name.lowercased().contains(searchTerm.lowercased()) ||
+			creationDate.description.lowercased().contains(searchTerm.lowercased()) ||
+			type.description.lowercased().contains(searchTerm.lowercased())
+		{
 			true
 		} else {
 			switch type {
 			case .multipleChoice(let multipleChoice):
-				multipleChoice!.question.contains(searchTerm) || multipleChoice!.answers.first { !$0.text.isEmpty && $0.text.contains(searchTerm) } != nil
-			case .indexCard(let indexCard): indexCard!.front.text.contains(searchTerm) || indexCard!.back.text.contains(searchTerm)
+				multipleChoice!.question.lowercased().contains(searchTerm.lowercased()) ||
+				multipleChoice!.answers.first {
+					!$0.text.isEmpty && $0.text.lowercased().contains(searchTerm.lowercased())
+				} != nil
+			case .indexCard(let indexCard):
+				indexCard!.front.text.lowercased().contains(searchTerm.lowercased()) ||
+				indexCard!.back.text.lowercased().contains(searchTerm.lowercased())
 			default: false
 			}
 		}
