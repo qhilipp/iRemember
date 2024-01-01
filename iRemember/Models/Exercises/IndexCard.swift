@@ -24,7 +24,6 @@ class IndexCard {
 class IndexCardPage {
 	
 	var text: String
-	var explanation: String
 	
 	@ImageCache
 	@Attribute(.externalStorage) var imageData: Data?
@@ -33,9 +32,8 @@ class IndexCardPage {
 		!text.isEmpty || imageData != nil
 	}
 	
-	init(text: String = "", explanation: String = "", imageData: Data? = nil) {
+	init(text: String = "", imageData: Data? = nil) {
 		self.text = text
-		self.explanation = explanation
 		self.imageData = imageData
 	}
 	

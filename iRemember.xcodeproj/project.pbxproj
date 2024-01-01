@@ -25,6 +25,8 @@
 		A119BCD72A82370B00B31626 /* SessionStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A119BCD62A82370B00B31626 /* SessionStatisticsView.swift */; };
 		A119BCD92A82372700B31626 /* SessionStatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A119BCD82A82372700B31626 /* SessionStatisticsViewModel.swift */; };
 		A119BCDB2A82378400B31626 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A119BCDA2A82378400B31626 /* Statistic.swift */; };
+		A11A4F972B3F87D8002B55A6 /* PredicateWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A4F962B3F87D8002B55A6 /* PredicateWrapper.swift */; };
+		A11A4F9C2B409B2C002B55A6 /* ExerciseSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A4F9B2B409B2C002B55A6 /* ExerciseSelectorView.swift */; };
 		A12AD5912AC77A1300D26FF3 /* CorrelationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12AD5902AC77A1300D26FF3 /* CorrelationView.swift */; };
 		A12AD5932AC77A1C00D26FF3 /* CorrelationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12AD5922AC77A1C00D26FF3 /* CorrelationViewModel.swift */; };
 		A12AD5972AC77ED200D26FF3 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12AD5962AC77ED200D26FF3 /* Point.swift */; };
@@ -115,6 +117,8 @@
 		A119BCD62A82370B00B31626 /* SessionStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatisticsView.swift; sourceTree = "<group>"; };
 		A119BCD82A82372700B31626 /* SessionStatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatisticsViewModel.swift; sourceTree = "<group>"; };
 		A119BCDA2A82378400B31626 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
+		A11A4F962B3F87D8002B55A6 /* PredicateWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateWrapper.swift; sourceTree = "<group>"; };
+		A11A4F9B2B409B2C002B55A6 /* ExerciseSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSelectorView.swift; sourceTree = "<group>"; };
 		A12AD5902AC77A1300D26FF3 /* CorrelationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationView.swift; sourceTree = "<group>"; };
 		A12AD5922AC77A1C00D26FF3 /* CorrelationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationViewModel.swift; sourceTree = "<group>"; };
 		A12AD5962AC77ED200D26FF3 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -326,6 +330,14 @@
 			path = SessionStatistics;
 			sourceTree = "<group>";
 		};
+		A11A4F982B409B07002B55A6 /* ExerciseSelector */ = {
+			isa = PBXGroup;
+			children = (
+				A11A4F9B2B409B2C002B55A6 /* ExerciseSelectorView.swift */,
+			);
+			path = ExerciseSelector;
+			sourceTree = "<group>";
+		};
 		A12AD58F2AC779DA00D26FF3 /* Correlation */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +523,7 @@
 				A10DE16E2A6F0BAB00A3DA2C /* ExerciseEditor */,
 				A1E0202A2A6BF79400C5599F /* ExerciseList */,
 				A1E0202F2A6D4BC800C5599F /* LearnlistList */,
+				A11A4F982B409B07002B55A6 /* ExerciseSelector */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -555,6 +568,7 @@
 				A149AAA82AC60214005BA623 /* GlobalManager.swift */,
 				A12AD5962AC77ED200D26FF3 /* Point.swift */,
 				A1FAD7F92B3AE2EE0085B316 /* Rating.swift */,
+				A11A4F962B3F87D8002B55A6 /* PredicateWrapper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -744,6 +758,7 @@
 				A1E020312A6D4BDD00C5599F /* LearnlistListView.swift in Sources */,
 				A1638D432A8570F3004F9001 /* ReferenceHistoryComparisonViewModel.swift in Sources */,
 				A10DE19B2A7061E900A3DA2C /* MultipleChoicePracticeView.swift in Sources */,
+				A11A4F9C2B409B2C002B55A6 /* ExerciseSelectorView.swift in Sources */,
 				A1FAD7FA2B3AE2EE0085B316 /* Rating.swift in Sources */,
 				A1025B542B3F71E300CA4B00 /* AllModelsView.swift in Sources */,
 				A1E6BFBD2A719850005E33D0 /* ViewExtension.swift in Sources */,
@@ -756,6 +771,7 @@
 				A1CDDD372AA6251E00122DE3 /* DistributionViewModel.swift in Sources */,
 				A104C5062ADAD63F0086F581 /* IndexCardEditorView.swift in Sources */,
 				A1DBFBC12AC0ADC700DEE3E8 /* DivisionViewModel.swift in Sources */,
+				A11A4F972B3F87D8002B55A6 /* PredicateWrapper.swift in Sources */,
 				A1CDDD352AA6251400122DE3 /* DistributionView.swift in Sources */,
 				A10DE1712A6F0BE600A3DA2C /* ExerciseEditorView.swift in Sources */,
 				A1E01FF62A6BED6000C5599F /* iRememberApp.swift in Sources */,

@@ -13,14 +13,16 @@ struct AllModelsView: View {
     var body: some View {
 		NavigationStack {
 			List {
-				NavigationLink("Learnlists") {
-					AllLearnlistsView()
-				}
-				NavigationLink("Exercises") {
-					AllExercisesView()
-				}
+				NavigationLink("Learnlists", value: PredicateWrapper<Learnlist>.all)
+				NavigationLink("Exercises", value: PredicateWrapper<Exercise>.all)
 			}
 			.navigationTitle("All Model Types")
+			.navigationDestination(for: PredicateWrapper<Learnlist>.self) {
+				ListView(predicate: $0.predicate)
+			}
+			.navigationDestination(for: PredicateWrapper<Exercise>.self) {
+				ListView(predicate: $0.predicate)
+			}
 			.navigationDestination(for: Learnlist.self) {
 				LearnlistInfoView(learnlist: $0)
 			}
@@ -32,31 +34,40 @@ struct AllModelsView: View {
 	
 }
 
-struct AllLearnlistsView: View {
+struct ListView<T: PersistentModel>: View {
 	
-	@Query var learnlists: [Learnlist]
+	let predicate: Predicate<T>
+	@State var models: [T] = []
 	
 	var body: some View {
 		List {
-			ForEach(learnlists) { learnlist in
-				NavigationLink(value: learnlist) {
-					ListItemView(itemType: .learnlist(learnlist))
+			ForEach(models) { model in
+				NavigationLink(value: model) {
+					ListItemView(for: model)
 				}
 			}
 		}
-		.navigationTitle("All learnlists")
+		.navigationTitle(String(describing: T.self))
+		.onAppear(perform: update)
+	}
+	
+	func update() {
+		models = GlobalManager.shared.fetch(using: predicate)
 	}
 	
 }
 
 struct LearnlistInfoView: View {
 	
-	var learnlist: Learnlist
+	let learnlist: Learnlist
+	var exerciseIds: [UUID] { learnlist.exercises.map { $0.id } }
+	var customPredicate: Predicate<Exercise> { #Predicate<Exercise> { exerciseIds.contains($0.id) } }
 	
 	var body: some View {
 		Form {
 			LabeledContent("Date", value: learnlist.creationDate.description)
 			LabeledContent("Detail", value: learnlist.detail)
+			NavigationLink("Exercises", value: PredicateWrapper<Exercise>(customPredicate))
 			Section("Time limitation") {
 				LabeledContent("Has time limitation", value: learnlist.hasTimeLimitation.description)
 				LabeledContent("Time limitation", value: learnlist.timeLimitation.description)
@@ -68,23 +79,6 @@ struct LearnlistInfoView: View {
 	
 }
 
-struct AllExercisesView: View {
-	
-	@Query var exercises: [Exercise]
-	
-	var body: some View {
-		List {
-			ForEach(exercises) { exercise in
-				NavigationLink(value: exercise) {
-					ListItemView(itemType: .exercise(exercise))
-				}
-			}
-		}
-		.navigationTitle("All exercises")
-	}
-	
-}
-
 struct ExerciseInfoView: View {
 	
 	var exercise: Exercise
@@ -92,12 +86,12 @@ struct ExerciseInfoView: View {
 	var body: some View {
 		Form {
 			Section {
-				LabeledContent("Name", value: exercise.name)
 				LabeledContent("Id", value: exercise.id.description)
 				LabeledContent("Type", value: exercise.type.description)
 				LabeledContent("Date", value: exercise.creationDate.description)
 				LabeledContent("Score", value: exercise.score.description)
 			}
+			PersistentModelInfoView(model: exercise)
 		}
 		.navigationTitle(exercise.name)
 	}

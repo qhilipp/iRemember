@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 struct ListItemView: View {
 	
@@ -17,6 +18,18 @@ struct ListItemView: View {
 		formatter.timeStyle = .none
 		return formatter
 	}()
+	
+	init(for model: any PersistentModel) {
+		if let exercise = model as? Exercise {
+			itemType = .exercise(exercise)
+		} else if let learnlist = model as? Learnlist {
+			itemType = .learnlist(learnlist)
+		} else if let practiceSession = model as? PracticeSession {
+			itemType = .practiceSession(practiceSession)
+		} else {
+			itemType = .unknown(model)
+		}
+	}
 	
 	var body: some View {
 		HStack(spacing: 15) {
@@ -59,6 +72,7 @@ struct ListItemView: View {
 		case .exercise: nil
 		case .learnlist(let learnlist): learnlist.sortedExercises.count
 		case .practiceSession(let practiceSession): practiceSession.sortedStatistics.count
+		case .unknown: nil
 		}
 	}
 	
@@ -67,14 +81,16 @@ struct ListItemView: View {
 		case .exercise(let exercise): exercise.name
 		case .learnlist(let learnlist): learnlist.name
 		case .practiceSession(let practiceSession): practiceSession.title
+		case .unknown(let model): model.id.hashValue.description
 		}
 	}
 	
 	var description: String {
 		switch itemType {
-		case .exercise(let exercise): "\(Self.formatter.string(from: exercise.creationDate)) • \(exercise.score)"
-		case .learnlist(let learnlist): "\(Self.formatter.string(from: learnlist.creationDate))"
+		case .exercise(let exercise): Self.formatter.string(from: exercise.creationDate)
+		case .learnlist(let learnlist): Self.formatter.string(from: learnlist.creationDate)
 		case .practiceSession(let practiceSession): practiceSession.id.uuidString
+		case .unknown: ""
 		}
 	}
 	
@@ -104,6 +120,7 @@ struct ListItemView: View {
 		case exercise(_: Exercise)
 		case learnlist(_: Learnlist)
 		case practiceSession(_: PracticeSession)
+		case unknown(_: any PersistentModel)
 	}
 	
 	enum ImageType {

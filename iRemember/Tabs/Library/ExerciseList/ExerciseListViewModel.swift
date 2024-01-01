@@ -17,10 +17,13 @@ class ExerciseListViewModel {
 	var sortBy: SortBy = .date
 	var ordering: Ordering = .ascending
 	var showAddExercise = false
+	var showSelectExercises = false
 	var showEdit = false
 	var showInfo = false
+	var showConfirmDelete = false
+	var indexSetToDelte: IndexSet?
 	
-	var filteredExercises: [Exercise] {
+	var exerciseResults: [Exercise] {
 		if searchTerm == "" {
 			return learnlist.sortedExercises
 		}
@@ -39,11 +42,20 @@ class ExerciseListViewModel {
 		self.learnlist = learnlist
 	}
 	
-	func delete(indexSet: IndexSet) {
-		learnlist.exercises.remove(atOffsets: indexSet)
-		for index in indexSet {
-			GlobalManager.shared.context.delete(learnlist.exercises[index])
+	func confirmDelete(indexSet: IndexSet) {
+		showConfirmDelete = true
+		indexSetToDelte = indexSet
+	}
+	
+	func remove(andDelete delete: Bool) {
+		guard let indexSetToDelte else { return }
+		if delete {
+			for index in indexSetToDelte {
+				GlobalManager.shared.context.delete(learnlist.exercises[index])
+			}
 		}
+		learnlist.exercises.remove(atOffsets: indexSetToDelte)
+		self.indexSetToDelte = nil
 	}
 	
 }

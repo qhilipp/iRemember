@@ -22,11 +22,7 @@ struct ExerciseListView: View {
 			.searchable(text: $vm.searchTerm)
 			.toolbar {
 				ToolbarItem {
-					Button {
-						vm.showAddExercise.toggle()
-					} label: {
-						Image(systemName: "square.and.pencil")
-					}
+					addMenu
 				}
 				ToolbarItem {
 					menu
@@ -35,11 +31,20 @@ struct ExerciseListView: View {
 			.sheet(isPresented: $vm.showAddExercise) {
 				ExerciseEditorView(in: vm.learnlist)
 			}
+			.exerciseSelector(isPresented: $vm.showSelectExercises, selection: $vm.learnlist.exercises)
 			.sheet(isPresented: $vm.showEdit) {
 				LearnlistEditorView(learnlist: vm.learnlist)
 			}
 			.sheet(isPresented: $vm.showInfo) {
 				LearnlistStatisticsView(for: vm.learnlist)
+			}
+			.confirmationDialog("Confirm delete", isPresented: $vm.showConfirmDelete) {
+				Button("Remove from Learnlist") {
+					vm.remove(andDelete: false)
+				}
+				Button("Delete exercise", role: .destructive) {
+					vm.remove(andDelete: true)
+				}
 			}
     }
 	
@@ -98,7 +103,7 @@ extension ExerciseListView {
 			Section {
 				ForEach(vm.learnlist.exercises, id: \.id) { exercise in
 					NavigationLink(value: PracticeSession(.queue([exercise]))) {
-						ListItemView(itemType: .exercise(exercise))
+						ListItemView(for: exercise)
 					}
 					.swipeActions(edge: .leading) {
 						Button {
@@ -109,8 +114,25 @@ extension ExerciseListView {
 						.tint(.orange)
 					}
 				}
-				.onDelete(perform: vm.delete)
+				.onDelete(perform: vm.confirmDelete(indexSet:))
 			}
+		}
+	}
+	
+	var addMenu: some View {
+		Menu {
+			Button {
+				vm.showAddExercise = true
+			} label: {
+				Label("Create new", systemImage: "plus.app")
+			}
+			Button {
+				vm.showSelectExercises = true
+			} label: {
+				Label("Select existing", systemImage: "checkmark.circle")
+			}
+		} label: {
+			Image(systemName: "square.and.pencil")
 		}
 	}
 	

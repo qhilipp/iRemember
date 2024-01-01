@@ -39,6 +39,14 @@ extension View {
 		self.listRowInsets(EdgeInsets()).background(Color(.systemGroupedBackground))
 	}
 	
+	@ViewBuilder
+	func exerciseSelector(isPresented: Binding<Bool>, selection: Binding<[Exercise]>) -> some View {
+		self
+			.sheet(isPresented: isPresented) {
+				ExerciseSelectorView(isPresented: isPresented, selection: selection)
+			}
+	}
+	
 }
 
 extension Text {

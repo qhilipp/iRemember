@@ -19,4 +19,8 @@ final class GlobalManager {
 		
 	private init() {}
 	
+	func fetch<T: PersistentModel>(using predicate: Predicate<T>? = nil, sortBy sortion: [SortDescriptor<T>] = []) -> [T] {
+		(try? context.fetch(FetchDescriptor(predicate: predicate, sortBy: sortion))) ?? []
+	}
+	
 }

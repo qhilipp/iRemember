@@ -70,19 +70,12 @@ struct IndexCardPracticeView: View {
 	
 	@ViewBuilder
 	func indexCardPracticeView(for page: IndexCardPage) -> some View {
-		VStack {
-			Text(page.text)
-				.font(.title)
-			if !page.explanation.isEmpty {
-				Text(page.explanation)
-					.foregroundStyle(.secondary)
-					.font(.footnote)
-			}
-		}
-		.padding()
-		.frame(maxWidth: .infinity, minHeight: 250)
-		.background(Color(uiColor: UIColor.secondarySystemBackground))
-		.clipShape(.rect(cornerRadius: 10))
+		Text(page.text)
+			.font(.title)
+			.padding()
+			.frame(maxWidth: .infinity, minHeight: 250)
+			.background(Color(uiColor: UIColor.secondarySystemBackground))
+			.clipShape(.rect(cornerRadius: 10))
 	}
 	
 }

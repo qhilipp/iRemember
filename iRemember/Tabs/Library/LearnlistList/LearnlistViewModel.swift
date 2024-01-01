@@ -47,6 +47,7 @@ class LearnlistViewModel {
 			}
 		}
 		learnlists.remove(atOffsets: indexSetToDelete)
+		self.indexSetToDelete = nil
 	}
 	
 }

@@ -72,6 +72,19 @@ final class Exercise: Identifiable, Hashable {
 		self.creationDate = .now
 	}
 	
+	func matches(searchTerm: String) -> Bool {
+		if name.contains(searchTerm) || creationDate.description.contains(searchTerm) {
+			true
+		} else {
+			switch type {
+			case .multipleChoice(let multipleChoice):
+				multipleChoice!.question.contains(searchTerm) || multipleChoice!.answers.first { !$0.text.isEmpty && $0.text.contains(searchTerm) } != nil
+			case .indexCard(let indexCard): indexCard!.front.text.contains(searchTerm) || indexCard!.back.text.contains(searchTerm)
+			default: false
+			}
+		}
+	}
+	
 }
 
 enum ExerciseType: Identifiable, Hashable, CustomStringConvertible, CaseIterable {

@@ -19,7 +19,7 @@ struct LearnlistListView: View {
 			List {
 				ForEach(vm.filteredLearnlists) { learnlist in
 					NavigationLink(value: learnlist) {
-						ListItemView(itemType: .learnlist(learnlist))
+						ListItemView(for: learnlist)
 					}
 				}
 				.onDelete(perform: vm.confirmDelete(indexSet:))
@@ -47,12 +47,12 @@ struct LearnlistListView: View {
 				LearnlistEditorView()
 			}
 			.confirmationDialog("Delete", isPresented: $vm.showConfirmDelete) {
-				Button("Delete only learnlist", role: .destructive) {
-					vm.delete(recursive: true)
+				Button("Delete only learnlist") {
+					vm.delete(recursive: false)
 				}
 				Button("Also delete exercises", role: .destructive) {
-					vm.delete(recursive: false)
-				}.bold()
+					vm.delete(recursive: true)
+				}
 			} message: {
 				Text("Do you want to delete the learnlist and all exercises in it?")
 			}

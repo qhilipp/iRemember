@@ -20,7 +20,7 @@ struct LearnlistStatisticsView: View {
 			List {
 				ForEach(vm.filteredSessions) { session in
 					NavigationLink(value: session) {
-						ListItemView(itemType: .practiceSession(session))
+						ListItemView(for: session)
 					}
 				}
 				.onDelete(perform: vm.delete(offsets:))
