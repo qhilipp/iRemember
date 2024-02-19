@@ -18,6 +18,10 @@ class MultipleChoiceEditorViewModel: ExerciseEditorDelegate {
 	
 	init(vm: ExerciseEditorViewModel) {
 		self.vm = vm
+		if let multipleChoice = vm.exercise.multipleChoice {
+			self.multipleChoice = multipleChoice
+			answers = multipleChoice.answers
+		}
 		GlobalManager.shared.context.insert(multipleChoice)
 	}
 	

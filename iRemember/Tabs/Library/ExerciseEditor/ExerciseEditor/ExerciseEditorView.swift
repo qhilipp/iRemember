@@ -32,28 +32,22 @@ struct ExerciseEditorView: View {
 				Section {
 					ForEach(ExerciseType.parameterAllCases(using: vm.exercise)) { type in
 						NavigationLink(type.description, value: type)
-							.disabled(!vm.canNavigate)
+							.disabled(!vm.canNavigate(to: type))
+					}
+				} footer: {
+					if !vm.isInCreationMode {
+						Text("The type of an exercise cannot be changed")
 					}
 				}
 			}
 			.toolbar {
-				#if os(iOS)
 				ToolbarItem(placement: .topBarLeading) {
 					Button("Cancel") {
 						dismiss()
 					}
 				}
-				#else
-				ToolbarItem {
-					Button("Cancel") {
-						dismiss()
-					}
-				}
-				#endif
 			}
-			#if os(iOS)
 			.navigationBarTitleDisplayMode(.inline)
-			#endif
 			.navigationTitle(vm.isInCreationMode ? "Add exercise" : "Edit exercise")
 			.navigationDestination(for: ExerciseType.self) { type in
 				ScrollViewReader { proxy in
@@ -64,19 +58,11 @@ struct ExerciseEditorView: View {
 				}
 				.navigationTitle(type.description)
 				.toolbar {
-					#if os(iOS)
 					ToolbarItem(placement: .topBarTrailing) {
 						NavigationLink("Continue") {
 							settings
 						}
 					}
-					#else
-					ToolbarItem {
-						NavigationLink("Continue") {
-							settings
-						}
-					}
-					#endif
 				}
 				.alert("Missing information", isPresented: $vm.showMissingInformationError) {} message: {
 					if let errorMessage = vm.missingInformationErrorMessage {
@@ -102,21 +88,12 @@ struct ExerciseEditorView: View {
 			}
 		}
 		.toolbar {
-			#if os(iOS)
 			ToolbarItem(placement: .topBarTrailing) {
-				Button("Add") {
+				Button(vm.isInCreationMode ? "Add" : "Done") {
 					vm.add()
 					dismiss()
 				}
 			}
-			#else
-			ToolbarItem {
-				Button("Add") {
-					vm.add()
-					dismiss()
-				}
-			}
-			#endif
 		}
 	}
 	

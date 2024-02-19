@@ -44,11 +44,10 @@ class ExerciseEditorViewModel {
 	init(exercise: Exercise?, learnlist: Learnlist?) {
 		self.exercise = exercise ?? Exercise()
 		self.learnlist = learnlist
-//		learnlist?.exercises.append(self.exercise)
 	}
 	
 	func setup() {
-		if isInCreationMode {
+		if !isInCreationMode {
 			navigationPath.append(exercise.type)
 		}
 	}
@@ -61,6 +60,10 @@ class ExerciseEditorViewModel {
 	
 	func scrollTo<H: Hashable>(_ id: H, anchor: UnitPoint? = nil) {
 		scrollProxy.scrollTo(id, anchor: anchor)
+	}
+	
+	func canNavigate(to type: ExerciseType) -> Bool {
+		canNavigate && (isInCreationMode || exercise.type == type)
 	}
 	
 }
