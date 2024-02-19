@@ -17,10 +17,13 @@ class IndexCardEditorViewModel: ExerciseEditorDelegate {
 	var vm: ExerciseEditorViewModel
 	var isEditingFront = true
 	
-	init(vm: ExerciseEditorViewModel, indexCard: IndexCard) {
+	init(vm: ExerciseEditorViewModel) {
 		self.vm = vm
-		self.indexCard = indexCard
 		GlobalManager.shared.context.insert(indexCard)
+		if let indexCard = vm.exercise.indexCard {
+			front = indexCard.front
+			back = indexCard.back
+		}
 	}
 	
 	func setup() {

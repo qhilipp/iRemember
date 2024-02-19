@@ -23,7 +23,7 @@ struct MultipleChoicePracticeView: View {
 				answers
 			}
 			.clipShape(.rect(cornerRadius: 10))
-			.padding([.leading, .trailing])
+			.padding(.horizontal)
 		}
 	}
 	
@@ -32,13 +32,13 @@ struct MultipleChoicePracticeView: View {
 		LabeledImage(vm.multipleChoiceExercise.image, alignment: .top) {
 			Text(vm.multipleChoiceExercise.question)
 				.font(.system(.title, design: .rounded, weight: .heavy))
-			if let feedback = vm.rating {
-				switch feedback {
+			if vm.vm.isRevealed {
+				switch vm.vm.currentStatistic.correctness.rating {
 				case .wrong:
-					Text("All wrong")
+					Text("Wrong")
 						.foregroundStyle(.secondary)
 				case .correct:
-					Text("All correct")
+					Text("Correct")
 						.gradientForeground()
 				default:
 					HStack(spacing: 0) {

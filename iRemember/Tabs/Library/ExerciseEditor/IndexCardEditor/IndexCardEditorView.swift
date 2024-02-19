@@ -11,8 +11,8 @@ struct IndexCardEditorView: View {
 	
 	@State var vm: IndexCardEditorViewModel
 	
-	init(vm: ExerciseEditorViewModel, indexCard: IndexCard) {
-		self._vm = State(initialValue: IndexCardEditorViewModel(vm: vm, indexCard: indexCard))
+	init(vm: ExerciseEditorViewModel) {
+		self._vm = State(initialValue: IndexCardEditorViewModel(vm: vm))
 	}
 	
     var body: some View {

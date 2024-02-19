@@ -29,13 +29,10 @@ struct ExercisePracticeView: View {
 				.padding(.horizontal)
 				.frame(maxWidth: .infinity)
 		}
-		#if os(iOS)
 		.toolbar(.hidden, for: .tabBar)
 		.navigationBarTitleDisplayMode(.inline)
-		#endif
 		.navigationTitle(vm.currentExercise.name)
 		.toolbar {
-			#if os(iOS)
 			ToolbarItem(placement: .topBarTrailing) {
 				Menu {
 					menu
@@ -43,15 +40,6 @@ struct ExercisePracticeView: View {
 					Image(systemName: "ellipsis.circle")
 				}
 			}
-			#else
-			ToolbarItem {
-				Menu {
-					menu
-				} label: {
-					Image(systemName: "ellipsis.circle")
-				}
-			}
-			#endif
 			ToolbarItem(placement: .principal) {
 				VStack {
 					Text(vm.currentExercise.name)
