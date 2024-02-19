@@ -10,38 +10,51 @@ import SwiftData
 
 struct ExerciseEditorView: View {
 	
-	@Environment(\.dismiss) var dismissAction
+	@Environment(\.dismiss) var dismiss
 	@State var vm: ExerciseEditorViewModel
 	@FocusState var focus: Int?
-	@State var showMore = false
+
+	init(exercise: Exercise) {
+		_vm = State(initialValue: ExerciseEditorViewModel(exercise: exercise, learnlist: nil))
+	}
 	
-	init(exercise: Exercise = Exercise(), in learnlist: Learnlist) {
-		_vm = State(initialValue: ExerciseEditorViewModel(exercise: exercise, in: learnlist))
+	init(in learnlist: Learnlist) {
+		_vm = State(initialValue: ExerciseEditorViewModel(exercise: nil, learnlist: learnlist))
 	}
 	
     var body: some View {
-		NavigationStack {
+		NavigationStack(path: $vm.navigationPath) {
 			Form {
 				Section {
 					TextField("Name", text: $vm.exercise.name)
 						.focused($focus, equals: 0)
 				}
 				Section {
-					ForEach(ExerciseType.allCases) { type in
+					ForEach(ExerciseType.parameterAllCases(using: vm.exercise)) { type in
 						NavigationLink(type.description, value: type)
 							.disabled(!vm.canNavigate)
 					}
 				}
 			}
 			.toolbar {
+				#if os(iOS)
 				ToolbarItem(placement: .topBarLeading) {
 					Button("Cancel") {
-						dismissAction()
+						dismiss()
 					}
 				}
+				#else
+				ToolbarItem {
+					Button("Cancel") {
+						dismiss()
+					}
+				}
+				#endif
 			}
+			#if os(iOS)
 			.navigationBarTitleDisplayMode(.inline)
-			.navigationTitle("Add Exercise")
+			#endif
+			.navigationTitle(vm.isInCreationMode ? "Add exercise" : "Edit exercise")
 			.navigationDestination(for: ExerciseType.self) { type in
 				ScrollViewReader { proxy in
 					specificEditor(for: type)
@@ -51,11 +64,19 @@ struct ExerciseEditorView: View {
 				}
 				.navigationTitle(type.description)
 				.toolbar {
+					#if os(iOS)
 					ToolbarItem(placement: .topBarTrailing) {
 						NavigationLink("Continue") {
 							settings
 						}
 					}
+					#else
+					ToolbarItem {
+						NavigationLink("Continue") {
+							settings
+						}
+					}
+					#endif
 				}
 				.alert("Missing information", isPresented: $vm.showMissingInformationError) {} message: {
 					if let errorMessage = vm.missingInformationErrorMessage {
@@ -66,7 +87,7 @@ struct ExerciseEditorView: View {
 		}
 		.onAppear {
 			focus = 0
-			vm.dismissAction = dismissAction
+			vm.setup()
 		}
     }
 	
@@ -81,11 +102,21 @@ struct ExerciseEditorView: View {
 			}
 		}
 		.toolbar {
+			#if os(iOS)
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Add") {
 					vm.add()
+					dismiss()
 				}
 			}
+			#else
+			ToolbarItem {
+				Button("Add") {
+					vm.add()
+					dismiss()
+				}
+			}
+			#endif
 		}
 	}
 	
@@ -93,7 +124,7 @@ struct ExerciseEditorView: View {
 	func specificEditor(for type: ExerciseType) -> some View {
 		switch(type) {
 		case .multipleChoice: MultipleChoiceEditorView(vm: vm)
-		case .indexCard: IndexCardEditorView(vm: vm)
+		case .indexCard(let indexCard): IndexCardEditorView(vm: vm, indexCard: indexCard!)
 		case .number: Text("Number")
 		case .vocabulary: Text("Vocabulary")
 		case .location: Text("Location")

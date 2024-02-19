@@ -13,11 +13,15 @@ import SwiftUI
 class ExerciseEditorViewModel {
 	
 	var exercise: Exercise
-	let learnlist: Learnlist
-	var dismissAction: DismissAction!
+	var learnlist: Learnlist?
 	var scrollProxy: ScrollViewProxy!
 	@ObservationIgnored var delegate: ExerciseEditorDelegate?
 	var missingInformationErrorMessage: String?
+	var navigationPath = NavigationPath()
+	
+	var isInCreationMode: Bool {
+		learnlist != nil
+	}
 	
 	var canNavigate: Bool {
 		!exercise.name.isEmpty
@@ -37,20 +41,22 @@ class ExerciseEditorViewModel {
 		}
 	}
 	
-	init(exercise: Exercise, in learnlist: Learnlist) {
-		self.exercise = exercise
+	init(exercise: Exercise?, learnlist: Learnlist?) {
+		self.exercise = exercise ?? Exercise()
 		self.learnlist = learnlist
+//		learnlist?.exercises.append(self.exercise)
 	}
 	
 	func setup() {
-		self.learnlist.sortedExercises.append(self.exercise)
+		if isInCreationMode {
+			navigationPath.append(exercise.type)
+		}
 	}
 	
 	func add() {
 		guard delegate?.hasMissingInformation() == false else { return }
 		delegate?.add()
-		learnlist.sortedExercises.append(exercise)
-		dismissAction()
+		learnlist?.exercises.append(exercise)
 	}
 	
 	func scrollTo<H: Hashable>(_ id: H, anchor: UnitPoint? = nil) {

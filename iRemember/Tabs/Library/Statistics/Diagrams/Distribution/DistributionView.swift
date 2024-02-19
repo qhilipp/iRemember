@@ -30,7 +30,7 @@ struct DistributionView: View {
 				BarMark(x: .value("Index", value.index), y: .value("Value", value.value))
 					.foregroundStyle(value.color)
 					.zIndex(1)
-				if let referenceValue = value.referenceValue, vm.ySelection == nil {
+				if let referenceValue = value.referenceValue {
 					LineMark(x: .value("Index", value.index), y: .value("Reference", referenceValue))
 						.zIndex(2)
 						.interpolationMethod(.catmullRom)
@@ -42,36 +42,8 @@ struct DistributionView: View {
 						.foregroundStyle(.gray)
 						.opacity(0.5)
 				}
-				if let ySelection = vm.ySelection {
-					RuleMark(y: .value("Selection", ySelection))
-						.zIndex(3)
-						.foregroundStyle(.gray)
-						.opacity(0.5)
-						.annotation(overflowResolution: .init(x: .disabled, y: .fit(to: .chart))) {
-							selectionInfo
-						}
-				}
 			}
-			.chartYSelection(value: $vm.ySelection)
 			.frame(height: 200)
 		}
     }
-	
-	@ViewBuilder
-	var selectionInfo: some View {
-		if let selectionInfo = vm.selectionInfo {
-			VStack {
-				Text("\(Int(selectionInfo.value))")
-				HStack {
-					Text("Above: \(selectionInfo.aboveAbsolute) (\(selectionInfo.aboveRelative)%)")
-					Text("Below: \(selectionInfo.belowAbsolute) (\(selectionInfo.belowRelative)%)")
-				}
-			}
-			.font(.footnote)
-			.padding(5)
-			.background(.thinMaterial)
-			.cornerRadius(5)
-			.zIndex(4)
-		}
-	}
 }

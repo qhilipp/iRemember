@@ -44,7 +44,9 @@ struct TimeSelector: View {
 						.tag(i)
 				}
 			}
+			#if os(iOS)
 			.pickerStyle(.wheel)
+			#endif
 		}
 		.onChange(of: value.wrappedValue) { _, _ in
 			calculateTime()

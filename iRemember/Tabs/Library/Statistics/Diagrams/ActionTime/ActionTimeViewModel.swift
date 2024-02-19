@@ -14,8 +14,7 @@ class ActionTimeViewModel {
 	@ObservationIgnored let statistic: Statistic
 	
 	var chartData: [(Int, [Double])] {
-		print(statistic.timeInformation.actionTimes)
-		return statistic.timeInformation.actionTimes.values.enumerated().map { ($0.offset, $0.element) }
+		statistic.timeInformation.actionTimes.values.enumerated().map { ($0.offset, $0.element) }
 	}
 	
 	init(statistic: Statistic) {

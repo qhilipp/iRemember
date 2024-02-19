@@ -12,9 +12,9 @@ import SwiftUI
 @Model
 final class Statistic: Identifiable, Hashable {
 	
-	@Attribute(.unique) var id: UUID
-	@Relationship(.unique, deleteRule: .nullify, inverse: \Exercise.statistics) var exercise: Exercise! = nil
-	var timeInformation: TimeInformation
+	@Attribute(.unique) var id: UUID = UUID()
+	var exercise: Exercise! = nil
+	var timeInformation: TimeInformation = TimeInformation()
 	var correctness: Double = 0
 	@Relationship var multipleChoiceStatistic: MultipleChoiceStatistic?
 	
@@ -23,10 +23,7 @@ final class Statistic: Identifiable, Hashable {
 		return correctness * 100.0 / timeInformation.totalTime
 	}
 	
-	init() {
-		self.id = UUID()
-		self.timeInformation = TimeInformation()
-	}
+	init() {}
 	
 }
 

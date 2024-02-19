@@ -74,7 +74,7 @@ struct IndexCardPracticeView: View {
 			.font(.title)
 			.padding()
 			.frame(maxWidth: .infinity, minHeight: 250)
-			.background(Color(uiColor: UIColor.secondarySystemBackground))
+			.background(Color(.secondarySystemFill))
 			.clipShape(.rect(cornerRadius: 10))
 	}
 	

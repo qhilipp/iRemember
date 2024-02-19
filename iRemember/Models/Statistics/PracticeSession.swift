@@ -54,7 +54,7 @@ class PracticeSession {
 	}
 	
 	var sortedStatistics: [Statistic] {
-		statistics.sorted(by: { $0.timeInformation.date < $1.timeInformation.date })
+		statistics.sorted(by: { $0.hasChanges == $1.hasChanges/*$0.timeInformation?.date < $1.timeInformation?.date*/ })
 	}
 	
 	init(_ type: PracticeSessionType) {
@@ -79,7 +79,7 @@ enum PracticeSessionType {
 	
 	var exercises: [Exercise] {
 		switch self {
-		case .learnlist(let learnlist): learnlist.sortedExercises
+		case .learnlist(let learnlist): learnlist.exercises
 		case .queue(let exercises): exercises
 		}
 	}

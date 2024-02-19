@@ -29,20 +29,6 @@ final class Learnlist {
 	
 	@ImageCache
 	@Attribute(.externalStorage) var imageData: Data?
-		
-	var sortedExercises: [Exercise] {
-		get {
-//			switch type {
-			/*case .constant: */exercises.sorted(by: { $0.creationDate > $1.creationDate })
-//			case .dynamic:
-//				exercisesCache
-//			}
-		}
-		
-		set {
-			self.exercises = newValue
-		}
-	}
 	
 	init(name: String, detail: String = "", timeLimitation: TimeInterval? = nil, perExercise: Bool = false, imageData: Data? = nil) {
 		self.id = UUID()

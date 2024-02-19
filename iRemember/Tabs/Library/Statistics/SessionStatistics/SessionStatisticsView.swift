@@ -20,23 +20,34 @@ struct SessionStatisticsView: View {
     var body: some View {
 		ScrollView {
 			VStack {
-//				referenceHistoryComparison
-//				distribution
-//				division
-//				TimeDistributionView(for: vm.practiceSession)
-//				CorrelationView(for: .practiceSession(vm.practiceSession, vm.historicSessions))
-//				moreButton
+				referenceHistoryComparison
+				distribution
+				division
+				TimeDistributionView(for: vm.practiceSession)
+				CorrelationView(for: .practiceSession(vm.practiceSession, vm.historicSessions))
+				moreButton
 			}
 		}
-		.navigationBarTitleDisplayMode(.large)
 		.navigationTitle("Statistics")
+		#if os(iOS)
+		.navigationBarTitleDisplayMode(.large)
+		#endif
 		.toolbar {
+			#if os(iOS)
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Done") {
 					GlobalManager.shared.navigationPath.removeLast()
 				}
 				.bold()
 			}
+			#else
+			ToolbarItem {
+				Button("Done") {
+					GlobalManager.shared.navigationPath.removeLast()
+				}
+				.bold()
+			}
+			#endif
 		}
     }
 	
@@ -93,9 +104,9 @@ struct SessionStatisticsView: View {
 		} label: {
 			Text("Statistics for exercises")
 				.padding()
-				.foregroundStyle(Color(.label))
+				.foregroundStyle(Color.label)
 				.frame(maxWidth: .infinity)
-				.background(Color(.systemGroupedBackground))
+				.background(Color.systemGroupedBackground)
 				.clipShape(.rect(cornerRadius: 5))
 		}
 		.padding()

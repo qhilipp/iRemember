@@ -31,13 +31,11 @@ struct ExerciseListView: View {
 			.sheet(isPresented: $vm.showAddExercise) {
 				ExerciseEditorView(in: vm.learnlist)
 			}
-			.exerciseSelector(isPresented: $vm.showSelectExercises, selection: $vm.learnlist.exercises)
+			.exerciseSelectorSheet(isPresented: $vm.showSelectExercises, selection: $vm.learnlist.exercises)
 			.sheet(isPresented: $vm.showEdit) {
 				LearnlistEditorView(learnlist: vm.learnlist)
 			}
-			.sheet(isPresented: $vm.showInfo) {
-				LearnlistStatisticsView(for: vm.learnlist)
-			}
+			.learnlistInfoSheet(isPresented: $vm.showInfo, learnlist: vm.learnlist)
 			.confirmationDialog("Confirm delete", isPresented: $vm.showConfirmDelete) {
 				Button("Remove from Learnlist") {
 					vm.remove(andDelete: false)
@@ -52,52 +50,10 @@ struct ExerciseListView: View {
 
 extension ExerciseListView {
 	
-	var header: some View {
-		VStack {
-			if let image = vm.learnlist.image {
-				image
-					.resizable()
-					.aspectRatio(contentMode: .fill)
-					.frame(width: 220, height: 220)
-					.rounded()
-			}
-			Text(vm.learnlist.name)
-				.font(.system(.largeTitle, design: .rounded, weight: .bold))
-			if !vm.learnlist.detail.isEmpty {
-				Text(vm.learnlist.detail)
-			}
-			if vm.learnlist.hasTimeLimitation {
-				Text("Timelimit: \(vm.learnlist.timeLimitation)")
-			}
-			if !vm.learnlist.sortedExercises.isEmpty {
-				Button {
-					GlobalManager.shared.navigationPath.append(PracticeSession(.learnlist(vm.learnlist)))
-				} label: {
-					Label("Learn", systemImage: "play")
-						.bold()
-						.padding(5)
-						.frame(maxWidth: .infinity)
-				}
-				.buttonStyle(.bordered)
-				.tint(.accentColor)
-			} else {
-				ContentUnavailableView {
-					Text("No exercises yet")
-				} actions: {
-					Button {
-						vm.showAddExercise = true
-					} label: {
-						Label("Add exercise", systemImage: "square.and.pencil")
-					}
-				}
-			}
-		}
-	}
-	
 	var mainView: some View {
 		List {
 			Section {
-				header
+				LearnlistHeaderView(learnlist: vm.learnlist)
 					.ignoreCell()
 			}
 			Section {

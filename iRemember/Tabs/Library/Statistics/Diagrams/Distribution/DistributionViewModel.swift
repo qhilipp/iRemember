@@ -18,17 +18,6 @@ class DistributionViewModel {
 	@ObservationIgnored let greaterIsBetter: Bool
 	
 	var referenceType: ReferenceType = .avg
-	private var ySelectionValue: Double?
-	var ySelection: Double? {
-		get {
-			ySelectionValue
-		}
-		set {
-			if newValue ?? -1 < maxChartValue {
-				ySelectionValue = newValue
-			}
-		}
-	}
 	var minChartValue = 0.0
 	var maxChartValue = 0.0
 	
@@ -61,17 +50,6 @@ class DistributionViewModel {
 		referenceType.referenceValue(of: practiceSession.sortedStatistics.compactMap { keyPath($0) })
 	}
 	
-	var selectionInfo: SelectionInfo? {
-		guard let ySelection else { return nil }
-		let values = chartData.map { $0.value }
-		return SelectionInfo(
-			value: ySelection,
-			count: values.count,
-			above: values.filter { $0 > ySelection }.count,
-			below: values.filter { $0 <= ySelection }.count
-		)
-	}
-	
 	init(_ name: String, practiceSession: PracticeSession, keyPath: @escaping (Statistic) -> Double?, greaterIsBetter: Bool) {
 		self.name = name
 		self.practiceSession = practiceSession
@@ -101,28 +79,12 @@ class DistributionViewModel {
 	}
 	
 	private func getColor(for statistic: Statistic, _ range: ClosedRange<Double>) -> Color {
-		guard let value = keyPath(statistic), let ySelection else { 
+		guard let value = keyPath(statistic) else {
 			return Styles.ratingColors(using: greaterIsBetter).interpolatedValue(at: keyPath(statistic)!.map(from: range, to: 0...1)) ?? .primary
 		}
-		return ySelection > value ? .gray : .accentColor
+		return .accentColor
 	}
 	
-}
-
-struct SelectionInfo {
-	let value: Double
-	let aboveAbsolute: Int
-	let aboveRelative: Int
-	let belowAbsolute: Int
-	let belowRelative: Int
-	
-	init(value: Double, count: Int, above: Int, below: Int) {
-		self.value = value
-		self.aboveAbsolute = above
-		self.belowAbsolute = below
-		self.aboveRelative = Int((Double(aboveAbsolute) / Double(count)) * 100)
-		self.belowRelative = Int((Double(belowAbsolute) / Double(count)) * 100)
-	}
 }
 
 struct ChartData: Identifiable {

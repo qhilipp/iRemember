@@ -79,7 +79,6 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 			next()
 		} else {
 			reveal()
-			scrollProxy?.scrollTo(1, anchor: .top)
 		}
 	}
 	
@@ -120,6 +119,8 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 		
 		delegate.attachSpecificStatistic(to: currentStatistic)
 		practiceSession.register(currentStatistic)
+		
+		scrollProxy?.scrollTo(1, anchor: .top)
 		
 		isRevealed = true
 	}

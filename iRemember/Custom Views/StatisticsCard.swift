@@ -33,6 +33,8 @@ struct StatisticsCard<Header: View, Content: View>: View {
 		}
 		.padding(.horizontal)
 		.containerRelativeFrame(.horizontal)
+		#if os(iOS)
 		.navigationBarTitleDisplayMode(.inline)
+		#endif
     }
 }

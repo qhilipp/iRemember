@@ -20,14 +20,12 @@ struct ListItemView: View {
 	}()
 	
 	init(for model: any PersistentModel) {
-		if let exercise = model as? Exercise {
-			itemType = .exercise(exercise)
-		} else if let learnlist = model as? Learnlist {
-			itemType = .learnlist(learnlist)
-		} else if let practiceSession = model as? PracticeSession {
-			itemType = .practiceSession(practiceSession)
-		} else {
-			itemType = .unknown(model)
+		itemType = switch model {
+		case let exercise as Exercise: .exercise(exercise)
+		case let learnlist as Learnlist: .learnlist(learnlist)
+		case let statistic as Statistic: .statistic(statistic)
+		case let practiceSession as PracticeSession: .practiceSession(practiceSession)
+		default: .unknown(model)
 		}
 	}
 	
@@ -70,7 +68,8 @@ struct ListItemView: View {
 	var itemCount: Int? {
 		switch itemType {
 		case .exercise: nil
-		case .learnlist(let learnlist): learnlist.sortedExercises.count
+		case .learnlist(let learnlist): learnlist.exercises.count
+		case .statistic: nil
 		case .practiceSession(let practiceSession): practiceSession.sortedStatistics.count
 		case .unknown: nil
 		}
@@ -80,6 +79,7 @@ struct ListItemView: View {
 		switch itemType {
 		case .exercise(let exercise): exercise.name
 		case .learnlist(let learnlist): learnlist.name
+		case .statistic(let statistic): statistic.exercise.name
 		case .practiceSession(let practiceSession): practiceSession.title
 		case .unknown(let model): model.id.hashValue.description
 		}
@@ -89,36 +89,47 @@ struct ListItemView: View {
 		switch itemType {
 		case .exercise(let exercise): Self.formatter.string(from: exercise.creationDate)
 		case .learnlist(let learnlist): Self.formatter.string(from: learnlist.creationDate)
+		case .statistic(let statistic): Self.formatter.string(from: statistic.timeInformation.date)
 		case .practiceSession(let practiceSession): practiceSession.id.uuidString
 		case .unknown: ""
 		}
 	}
 	
 	var imageType: ImageType {
-		if case .exercise(let exercise) = itemType {
-			switch exercise.type {
-			case .multipleChoice: ImageType.icon("questionmark.app.dashed")
-			case .indexCard: .icon("square.text.square")
-			case .number: .icon("number")
-			case .vocabulary: .icon("character.book.closed")
-			case .location: .icon("map")
-			case .list: .icon("list.bullet.clipboard")
-			case .none: .icon("nosign")
-			}
-		} else if case .learnlist(let learnlist) = itemType {
+		switch itemType {
+		case .exercise(let exercise):
+			image(for: exercise)
+		case .learnlist(let learnlist):
 			if let image = learnlist.image {
 				.photo(image)
 			} else {
 				.icon("list.bullet")
 			}
-		} else {
+		case .statistic(let statistic):
+			image(for: statistic.exercise)
+		case .practiceSession:
+			.icon("list.bullet.clipboard")
+		case .unknown:
 			.icon("nosign")
+		}
+	}
+	
+	func image(for exercise: Exercise) -> ImageType {
+		switch exercise.type {
+		case .multipleChoice: ImageType.icon("questionmark.app.dashed")
+		case .indexCard: .icon("square.text.square")
+		case .number: .icon("number")
+		case .vocabulary: .icon("character.book.closed")
+		case .location: .icon("map")
+		case .list: .icon("list.bullet.clipboard")
+		case .none: .icon("nosign")
 		}
 	}
 	
 	enum ItemType {
 		case exercise(_: Exercise)
 		case learnlist(_: Learnlist)
+		case statistic(_: Statistic)
 		case practiceSession(_: PracticeSession)
 		case unknown(_: any PersistentModel)
 	}

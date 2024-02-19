@@ -25,9 +25,9 @@ class ExerciseListViewModel {
 	
 	var exerciseResults: [Exercise] {
 		if searchTerm == "" {
-			return learnlist.sortedExercises
+			return learnlist.exercises
 		}
-		return learnlist.sortedExercises.filter { $0.name.contains(searchTerm) }
+		return learnlist.exercises.filter { $0.name.contains(searchTerm) }
 	}
 	
 	var formattedTimeLimitation: String? {

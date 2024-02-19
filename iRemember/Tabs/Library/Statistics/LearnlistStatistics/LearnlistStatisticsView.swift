@@ -26,9 +26,15 @@ struct LearnlistStatisticsView: View {
 				.onDelete(perform: vm.delete(offsets:))
 			}
 			.toolbar {
+				#if os(iOS)
 				ToolbarItem(placement: .topBarTrailing) {
 					menu
 				}
+				#else
+				ToolbarItem {
+					menu
+				}
+				#endif
 			}
 			.navigationDestination(for: PracticeSession.self) { practiceSession in
 				SessionStatisticsView(for: practiceSession)

@@ -8,36 +8,13 @@
 import Foundation
 import SwiftData
 
-//protocol Exercise: Identifiable, Hashable {
-//	
-//	var id: UUID { get set }
-//	var name: String { get set }
-//	var creationDate: Date { get set }
-//	var score: Double { get set }
-//	var hastTimeLimitation: Bool { get set }
-//	var timeLimitation: TimeInterval { get set }
-//	
-//}
-//
-//extension Exercise {
-//	
-//	var type: ExerciseType {
-//		if let _ = self as? MultipleChoice {
-//			.multipleChoice
-//		} else {
-//			.indexCard
-//		}
-//	}
-//	
-//}
-
 @Model
 final class Exercise: Identifiable, Hashable {
 		
 	@Attribute(.unique) var id: UUID
 	var name: String = ""
 	var creationDate: Date
-	@Relationship(.unique, deleteRule: .cascade) var statistics: [Statistic] = []
+	@Relationship(.unique, deleteRule: .cascade, inverse: \Statistic.exercise) var statistics: [Statistic] = []
 	@Relationship var multipleChoice: MultipleChoice?
 	@Relationship var indexCard: IndexCard?
 	var score: Double = 0
@@ -106,9 +83,13 @@ enum ExerciseType: Identifiable, Hashable, CustomStringConvertible, CaseIterable
 	case none
 	
 	static var allCases: [ExerciseType] {
+		parameterAllCases(using: Exercise())
+	}
+	
+	static func parameterAllCases(using exercise: Exercise) -> [ExerciseType] {
 		[
-			.multipleChoice(nil),
-			.indexCard(nil),
+			.multipleChoice(exercise.multipleChoice),
+			.indexCard(exercise.indexCard),
 		]
 	}
 	

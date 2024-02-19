@@ -26,7 +26,8 @@ struct DivisionView: View {
 						angularInset: 1
 					)
 					.cornerRadius(5)
-					.foregroundStyle(by: .value("Type", value.title))
+					// TODO: Figure out why this crashes the app
+//					.foregroundStyle(by: .value("Type", value.title))
 				}
 				.frame(height: 200)
 				.chartForegroundStyleScale(vm.completedChartForegroundStyleScale)

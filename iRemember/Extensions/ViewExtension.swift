@@ -36,14 +36,38 @@ extension View {
 	
 	@ViewBuilder
 	public func ignoreCell() -> some View {
-		self.listRowInsets(EdgeInsets()).background(Color(.systemGroupedBackground))
+		self.listRowInsets(EdgeInsets()).background(Color.systemGroupedBackground)
 	}
 	
 	@ViewBuilder
-	func exerciseSelector(isPresented: Binding<Bool>, selection: Binding<[Exercise]>) -> some View {
+	func exerciseSelectorSheet(isPresented: Binding<Bool>, selection: Binding<[Exercise]>) -> some View {
 		self
 			.sheet(isPresented: isPresented) {
-				ExerciseSelectorView(isPresented: isPresented, selection: selection)
+				ExerciseSelectorView(selection: selection)
+			}
+	}
+	
+	@ViewBuilder
+	func learnlistInfoSheet(isPresented: Binding<Bool>, learnlist: Learnlist) -> some View {
+		self
+			.sheet(isPresented: isPresented) {
+				NavigationStack {
+					LearnlistInfoView(for: learnlist)
+				}
+			}
+	}
+	
+	func exerciseEditorSheet(isPresented: Binding<Bool>, for exercise: Exercise) -> some View {
+		self
+			.sheet(isPresented: isPresented) {
+				ExerciseEditorView(exercise: exercise)
+			}
+	}
+	
+	func exerciseEditorSheet(isPresented: Binding<Bool>, in learnlist: Learnlist) -> some View {
+		self
+			.sheet(isPresented: isPresented) {
+				ExerciseEditorView(in: learnlist)
 			}
 	}
 	

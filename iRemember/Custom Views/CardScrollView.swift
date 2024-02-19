@@ -35,10 +35,14 @@ struct CardScrollView<Content: View, NavigationItem: Hashable>: View {
 				HStack(spacing: 0) {
 					content()
 				}
+				#if os(iOS)
 				.scrollTargetLayout()
+				#endif
 			}
+			#if os(iOS)
 			.scrollTargetBehavior(.paging)
 			.scrollIndicators(.hidden)
+			#endif
 		}
 	}
 	

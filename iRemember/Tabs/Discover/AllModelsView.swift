@@ -15,19 +15,27 @@ struct AllModelsView: View {
 			List {
 				NavigationLink("Learnlists", value: PredicateWrapper<Learnlist>.all)
 				NavigationLink("Exercises", value: PredicateWrapper<Exercise>.all)
+				NavigationLink("Statistics", value: PredicateWrapper<Statistic>.all)
+				NavigationLink("Practice Session", value: PredicateWrapper<PracticeSession>.all)
 			}
 			.navigationTitle("All Model Types")
 			.navigationDestination(for: PredicateWrapper<Learnlist>.self) {
 				ListView(predicate: $0.predicate)
 			}
+			.navigationDestination(for: Learnlist.self) {
+				LearnlistInfoView(for: $0)
+			}
 			.navigationDestination(for: PredicateWrapper<Exercise>.self) {
 				ListView(predicate: $0.predicate)
 			}
-			.navigationDestination(for: Learnlist.self) {
-				LearnlistInfoView(learnlist: $0)
-			}
 			.navigationDestination(for: Exercise.self) {
-				ExerciseInfoView(exercise: $0)
+				ExerciseInfoView(for: $0)
+			}
+			.navigationDestination(for: PredicateWrapper<Statistic>.self) {
+				ListView(predicate: $0.predicate)
+			}
+			.navigationDestination(for: Statistic.self) {
+				StatisticInfoView(statistic: $0)
 			}
 		}
     }
@@ -53,47 +61,6 @@ struct ListView<T: PersistentModel>: View {
 	
 	func update() {
 		models = GlobalManager.shared.fetch(using: predicate)
-	}
-	
-}
-
-struct LearnlistInfoView: View {
-	
-	let learnlist: Learnlist
-	var exerciseIds: [UUID] { learnlist.exercises.map { $0.id } }
-	var customPredicate: Predicate<Exercise> { #Predicate<Exercise> { exerciseIds.contains($0.id) } }
-	
-	var body: some View {
-		Form {
-			LabeledContent("Date", value: learnlist.creationDate.description)
-			LabeledContent("Detail", value: learnlist.detail)
-			NavigationLink("Exercises", value: PredicateWrapper<Exercise>(customPredicate))
-			Section("Time limitation") {
-				LabeledContent("Has time limitation", value: learnlist.hasTimeLimitation.description)
-				LabeledContent("Time limitation", value: learnlist.timeLimitation.description)
-			}
-			PersistentModelInfoView(model: learnlist)
-		}
-		.navigationTitle(learnlist.name)
-	}
-	
-}
-
-struct ExerciseInfoView: View {
-	
-	var exercise: Exercise
-	
-	var body: some View {
-		Form {
-			Section {
-				LabeledContent("Id", value: exercise.id.description)
-				LabeledContent("Type", value: exercise.type.description)
-				LabeledContent("Date", value: exercise.creationDate.description)
-				LabeledContent("Score", value: exercise.score.description)
-			}
-			PersistentModelInfoView(model: exercise)
-		}
-		.navigationTitle(exercise.name)
 	}
 	
 }

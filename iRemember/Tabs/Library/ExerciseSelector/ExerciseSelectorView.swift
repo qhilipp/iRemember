@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ExerciseSelectorView: View {
 	
+	@Environment(\.dismiss) var dismiss
 	@Binding var selection: [Exercise]
-	@Binding var isPresented: Bool
 	@State var exercises: [Exercise]
 	@State var searchTerm: String = ""
 	
@@ -22,8 +22,7 @@ struct ExerciseSelectorView: View {
 		}
 	}
 	
-	init(isPresented: Binding<Bool>, selection: Binding<[Exercise]>) {
-		self._isPresented = isPresented
+	init(selection: Binding<[Exercise]>) {
 		self._selection = selection
 		self._exercises = State(initialValue: GlobalManager.shared.fetch())
 	}
@@ -38,11 +37,19 @@ struct ExerciseSelectorView: View {
 			.searchable(text: $searchTerm)
 			.navigationTitle("Select exercises")
 			.toolbar {
+				#if os(iOS)
 				ToolbarItem(placement: .topBarTrailing) {
 					Button("Done") {
-						isPresented = false
+						dismiss()
 					}.bold()
 				}
+				#else
+				ToolbarItem {
+					Button("Done") {
+						dismiss()
+					}.bold()
+				}
+				#endif
 			}
 		}
     }

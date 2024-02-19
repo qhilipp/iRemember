@@ -17,8 +17,9 @@ class IndexCardEditorViewModel: ExerciseEditorDelegate {
 	var vm: ExerciseEditorViewModel
 	var isEditingFront = true
 	
-	init(vm: ExerciseEditorViewModel) {
+	init(vm: ExerciseEditorViewModel, indexCard: IndexCard) {
 		self.vm = vm
+		self.indexCard = indexCard
 		GlobalManager.shared.context.insert(indexCard)
 	}
 	

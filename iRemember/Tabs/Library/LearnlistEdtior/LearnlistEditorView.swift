@@ -36,11 +36,11 @@ struct LearnlistEditorView: View {
 							}
 						}
 						.frame(width: 120, height: 120)
-						.background(Color(.systemGroupedBackground))
+						.background(Color.systemGroupedBackground)
 						.rounded()
 						TextField("Name", text: $vm.learnlist.name)
 							.important()
-							.background(Color(.systemGroupedBackground))
+							.background(Color.systemGroupedBackground)
 							.rounded()
 							.focused($focus, equals: 0)
 					}
@@ -64,22 +64,13 @@ struct LearnlistEditorView: View {
 					TextField("Description", text: $vm.learnlist.detail, axis: .vertical)
 						.lineLimit(2...5)
 				}
-//				Section {
-//					Toggle("Dynamic", isOn: $vm.isDynamic)
-//					if vm.isDynamic {
-//						TextField("Rule", text: $vm.learnlist.containmentRule)
-//					}
-//				}
 			}
 			.toolbar {
+				#if os(iOS)
 				ToolbarItem(placement: .topBarLeading) {
 					Button("Cancel") {
 						dismissAction()
 					}
-				}
-				ToolbarItem(placement: .principal) {
-					Text(vm.principalText)
-						.bold()
 				}
 				ToolbarItem(placement: .topBarTrailing) {
 					Button(vm.ctaText) {
@@ -87,6 +78,24 @@ struct LearnlistEditorView: View {
 						dismissAction()
 					}
 					.disabled(!vm.canAdd)
+				}
+				#else
+				ToolbarItem {
+					Button("Cancel") {
+						dismissAction()
+					}
+				}
+				ToolbarItem {
+					Button(vm.ctaText) {
+						vm.addLearnlist()
+						dismissAction()
+					}
+					.disabled(!vm.canAdd)
+				}
+				#endif
+				ToolbarItem(placement: .principal) {
+					Text(vm.principalText)
+						.bold()
 				}
 			}
 		}
