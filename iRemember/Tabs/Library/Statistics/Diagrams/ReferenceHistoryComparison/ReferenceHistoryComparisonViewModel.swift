@@ -49,15 +49,18 @@ class ReferenceHistoryComparisonViewModel {
 			lastReferenceType = referenceType
 			switch source {
 			case .practiceSession(_, let sessions):
-				chartDataCache = sessions.enumerated().compactMap {
-					let values = $0.element.sortedStatistics.compactMap { keyPath($0) }
-					guard let value = referenceType.referenceValue(of: values) else { return nil }
-					return ChartData(
-						index: $0.offset,
-						value: value,
-						values: values
-					)
-				}
+				chartDataCache = sessions
+					.sorted { $0.date < $1.date }
+					.enumerated()
+					.compactMap {
+						let values = $0.element.sortedStatistics.compactMap { keyPath($0) }
+						guard let value = referenceType.referenceValue(of: values) else { return nil }
+						return ChartData(
+							index: $0.offset,
+							value: value,
+							values: values
+						)
+					}
 			case .statistic(_, let statistics):
 				chartDataCache = statistics.enumerated().compactMap {
 					guard let value = keyPath($0.element) else { return nil }

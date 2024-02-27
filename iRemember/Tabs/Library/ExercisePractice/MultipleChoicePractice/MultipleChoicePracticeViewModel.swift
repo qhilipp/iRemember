@@ -13,7 +13,7 @@ import SwiftData
 class MultipleChoicePracticeViewModel: ExercisePracticeDelegate {
 	
 	var vm: ExercisePracticeViewModel
-	var multipleChoiceExercise: MultipleChoice
+	var multipleChoice: MultipleChoice
 	var guesses: [Bool] {
 		willSet {
 			guard newValue != guesses else { return }
@@ -32,7 +32,7 @@ class MultipleChoicePracticeViewModel: ExercisePracticeDelegate {
 	var correctGuesses: Int {
 		var correctGuesses = 0
 		for i in 0..<guesses.count {
-			if guesses[i] == multipleChoiceExercise.answers[i].isCorrect {
+			if guesses[i] == multipleChoice.answers[i].isCorrect {
 				correctGuesses += 1
 			}
 		}
@@ -43,19 +43,18 @@ class MultipleChoicePracticeViewModel: ExercisePracticeDelegate {
 		guesses.count - correctGuesses
 	}
 	
-	init(for multipleChoiceExercise: MultipleChoice, vm: ExercisePracticeViewModel) {
-		self._vm = vm
-		self._multipleChoiceExercise = multipleChoiceExercise
-		self._guesses = [Bool].init(repeating: false, count: multipleChoiceExercise.answers.count)
-		self.vm.delegate = self
+	init(for multipleChoice: MultipleChoice, vm: ExercisePracticeViewModel) {
+		self.vm = vm
+		self.multipleChoice = multipleChoice
+		self.guesses = [Bool].init(repeating: false, count: multipleChoice.answers.count)
 	}
 	
 	func guessedCorrectly(_ index: Int) -> Bool {
-		guesses[index] == multipleChoiceExercise.answers[index].isCorrect
+		guesses[index] == multipleChoice.answers[index].isCorrect
 	}
 	
 	func explanation(for index: Int) -> String? {
-		let explanation = multipleChoiceExercise.answers[index].explanation
+		let explanation = multipleChoice.answers[index].explanation
 		if explanation == "" {
 			return nil
 		}
@@ -64,14 +63,14 @@ class MultipleChoicePracticeViewModel: ExercisePracticeDelegate {
 	
 	func attachSpecificStatistic(to statistic: Statistic) {
 		let multipleChoiceStatistic = MultipleChoiceStatistic()
-		multipleChoiceStatistic.multipleChoiceExercise = multipleChoiceExercise
+		multipleChoiceStatistic.multipleChoice = multipleChoice
 		
 		GlobalManager.shared.context.insert(multipleChoiceStatistic)
 		
 		statistic.statisticType = .multipleChoice(multipleChoiceStatistic)
 		
 		for i in guesses.indices {
-			multipleChoiceStatistic.map[multipleChoiceExercise.answers[i].id] = guesses[i]
+			multipleChoiceStatistic.map[multipleChoice.answers[i].id] = guesses[i]
 		}
 	}
 	

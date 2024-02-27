@@ -24,7 +24,7 @@ class LearnlistStatisticsViewModel {
 				if $0.id.uuidString.contains(searchTerm) {
 					return true
 				}
-				return if let date = $0.date { ListItemView.formatter.string(from: date).contains(searchTerm) } else { false }
+				return ListItemView.formatter.string(from: $0.date).contains(searchTerm)
 			}
 		}
 	}
@@ -70,10 +70,7 @@ class LearnlistStatisticsViewModel {
 				return learnlist == self.learnlist
 			}
 			return false
-		}.sorted {
-			guard let first = $0.date, let second = $1.date else { return false }
-			return first > second
-		}
+		}.sorted { $0.date < $1.date }
 	}
 	
 }

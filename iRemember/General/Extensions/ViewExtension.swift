@@ -71,6 +71,15 @@ extension View {
 			}
 	}
 	
+	func learnlistEditorSheet(isPresented: Binding<Bool>, for learnlist: Learnlist? = nil, dismissAction: (() -> Void)? = nil) -> some View {
+		self
+			.sheet(isPresented: isPresented) {
+				dismissAction?()
+			} content: {
+				LearnlistEditorView(learnlist: learnlist)
+			}
+	}
+	
 }
 
 extension Text {

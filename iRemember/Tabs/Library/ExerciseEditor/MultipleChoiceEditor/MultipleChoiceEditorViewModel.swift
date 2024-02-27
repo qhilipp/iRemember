@@ -25,10 +25,6 @@ class MultipleChoiceEditorViewModel: ExerciseEditorDelegate {
 		GlobalManager.shared.context.insert(multipleChoice)
 	}
 	
-	func setup() {
-		vm.delegate = self
-	}
-	
 	func addAnswer() {
 		answers.append(MultipleChoiceAnswer())
 	}
@@ -37,7 +33,7 @@ class MultipleChoiceEditorViewModel: ExerciseEditorDelegate {
 		answers.remove(atOffsets: indexSet)
 	}
 	
-	func add() {
+	func onComplete() {
 		multipleChoice.answers = answers
 		vm.exercise.type = .multipleChoice(multipleChoice)
 	}

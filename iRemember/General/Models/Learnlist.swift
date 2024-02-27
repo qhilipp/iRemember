@@ -26,9 +26,26 @@ final class Learnlist {
 	var isTimeLimitationPerExercise: Bool
 	var timeLimitation: TimeInterval
 	var creationDate: Date
+	var sortBy: SortBy
+	var ordering: Ordering
 	
 	@ImageCache
 	@Attribute(.externalStorage) var imageData: Data?
+	
+	var sortedExercises: [Exercise] {
+		exercises
+			.sorted {
+				switch sortBy {
+				case .name:
+					$0.name < $1.name
+				case .date:
+					$0.creationDate < $1.creationDate
+				case .score:
+					$0.score < $1.score
+				}
+			}
+			.apply([Exercise].reversed(_:), if: ordering == .descending)
+	}
 	
 	init(name: String, detail: String = "", timeLimitation: TimeInterval? = nil, perExercise: Bool = false, imageData: Data? = nil) {
 		self.id = UUID()
@@ -41,6 +58,8 @@ final class Learnlist {
 		self.creationDate = .now
 		self.exercises = []
 		self.type = .constant
+		self.sortBy = .date
+		self.ordering = .ascending
 	}
 	
 }
@@ -48,4 +67,21 @@ final class Learnlist {
 enum LearnlistType: Codable {
 	case constant
 	case dynamic
+}
+
+enum SortBy: String, Codable, CaseIterable, Identifiable {
+	var id: String {
+		rawValue
+	}
+	case name
+	case date
+	case score
+}
+
+enum Ordering: String, Codable, CaseIterable, Identifiable {
+	var id: String {
+		rawValue
+	}
+	case ascending
+	case descending
 }

@@ -14,7 +14,7 @@ struct ContentView: View {
 	
     var body: some View {
 		TabView {
-			LearnlistListView()
+			LibraryLandingPageView()
 				.tabItem {
 					Label("Library", systemImage: "books.vertical.fill")
 				}

@@ -11,21 +11,36 @@ import SwiftData
 @Observable
 class LibraryLandingPageViewModel {
 	
-	let allLearnlists: [Learnlist]
+	var allLearnlists: [Learnlist] = []
+	var showAddLearnlist = false
 	
 	var learnNow: [Learnlist] {
 		allLearnlists
 	}
 	
-	var lastAdded: [Learnlist] {
-		Array(allLearnlists.sorted {
-			$0.creationDate < $1.creationDate
-		}.prefix(through: 10))
+	var forYou: [Learnlist] {
+		allLearnlists
 	}
 	
+	var favorites: [Learnlist] {
+		allLearnlists
+	}
 	
+	var dueSoon: [Learnlist] {
+		allLearnlists
+	}
 	
-	init() {
+	var aLotToDo: [Learnlist] {
+		allLearnlists
+	}
+	
+	var all: [Learnlist] {
+		allLearnlists
+	}
+	
+	init() {}
+	
+	func fetch() {
 		allLearnlists = (try? GlobalManager.shared.context.fetch(FetchDescriptor<Learnlist>())) ?? []
 	}
 	

@@ -97,3 +97,19 @@ extension [Rating] {
 	}
 	
 }
+
+extension Array {
+	
+	func apply(_ operation: (Self) -> Self, if apply: Bool) -> Self {
+		if apply {
+			operation(self)
+		} else {
+			self
+		}
+	}
+	
+	static func reversed(_ array: Self) -> Self {
+		array.reversed()
+	}
+	
+}

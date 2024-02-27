@@ -79,10 +79,11 @@ class DistributionViewModel {
 	}
 	
 	private func getColor(for statistic: Statistic, _ range: ClosedRange<Double>) -> Color {
-		guard let value = keyPath(statistic) else {
-			return Styles.ratingColors(using: greaterIsBetter).interpolatedValue(at: keyPath(statistic)!.map(from: range, to: 0...1)) ?? .primary
+		if let value = keyPath(statistic) {
+			Styles.ratingColors(using: greaterIsBetter).interpolatedValue(at: keyPath(statistic)!.map(from: range, to: 0...1)) ?? .primary
+		} else {
+			.accentColor
 		}
-		return .accentColor
 	}
 	
 }

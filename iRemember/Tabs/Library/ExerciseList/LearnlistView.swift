@@ -1,5 +1,5 @@
 //
-//  FolderView.swift
+//  LearnlistView.swift
 //  iRemember
 //
 //  Created by Privat on 22.07.23.
@@ -8,12 +8,12 @@
 import SwiftUI
 import SwiftData
 
-struct ExerciseListView: View {
+struct LearnlistView: View {
 	
-	@State var vm: ExerciseListViewModel
+	@State var vm: LearnlistViewModel
 	
 	init(learnlist: Learnlist) {
-		self._vm = State(initialValue: ExerciseListViewModel(learnlist: learnlist))
+		self._vm = State(initialValue: LearnlistViewModel(learnlist: learnlist))
 	}
 	
     var body: some View {
@@ -35,6 +35,9 @@ struct ExerciseListView: View {
 			.sheet(isPresented: $vm.showEdit) {
 				LearnlistEditorView(learnlist: vm.learnlist)
 			}
+			.sheet(item: $vm.editExercise) {
+				ExerciseEditorView(exercise: $0)
+			}
 			.learnlistInfoSheet(isPresented: $vm.showInfo, learnlist: vm.learnlist)
 			.confirmationDialog("Confirm delete", isPresented: $vm.showConfirmDelete) {
 				Button("Remove from Learnlist") {
@@ -48,7 +51,7 @@ struct ExerciseListView: View {
 	
 }
 
-extension ExerciseListView {
+extension LearnlistView {
 	
 	var mainView: some View {
 		List {
@@ -57,21 +60,46 @@ extension ExerciseListView {
 					.ignoreCell()
 			}
 			Section {
-				ForEach(vm.learnlist.exercises, id: \.id) { exercise in
-					NavigationLink(value: PracticeSession(.queue([exercise]))) {
-						ListItemView(for: exercise)
-					}
-					.swipeActions(edge: .leading) {
-						Button {
-							// TODO: Queue items
-						} label: {
-							Image(systemName: "plus.viewfinder")
-						}
-						.tint(.orange)
-					}
-				}
-				.onDelete(perform: vm.confirmDelete(indexSet:))
+				exerciseList
 			}
+		}
+	}
+	
+	@ViewBuilder
+	var exerciseList: some View {
+		if vm.learnlist.exercises.isEmpty {
+			ContentUnavailableView("No exercises", systemImage: "nosign", description: Text("Add exercises to the learnlist to see them here"))
+				.ignoreCell()
+		} else if vm.exerciseResults.isEmpty {
+			ContentUnavailableView("No exercises", systemImage: "magnifyingglass", description: Text("The searchtearm yielded no results"))
+				.ignoreCell()
+		} else {
+			ForEach(vm.exerciseResults, id: \.id) { exercise in
+				NavigationLink(value: PracticeSession(.queue([exercise]))) {
+					ListItemView(for: exercise)
+						.contextMenu{
+							Button {
+								vm.editExercise = exercise
+							} label: {
+								Label("Edit", systemImage: "pencil")
+							}
+							Button(role: .destructive) {
+								vm.confirmDelete(for: exercise)
+							} label: {
+								Label("Delete", systemImage: "trash")
+							}
+						}
+				}
+				.swipeActions(edge: .leading) {
+					Button {
+						// TODO: Queue items
+					} label: {
+						Image(systemName: "plus.viewfinder")
+					}
+					.tint(.orange)
+				}
+			}
+			.onDelete(perform: vm.confirmDelete(indexSet:))
 		}
 	}
 	
@@ -113,13 +141,13 @@ extension ExerciseListView {
 			}
 			
 			Menu {
-				Picker("", selection: $vm.sortBy) {
+				Picker("", selection: $vm.learnlist.sortBy) {
 					ForEach(SortBy.allCases) {
 						Text($0.rawValue)
 							.tag($0)
 					}
 				}
-				Picker("", selection: $vm.ordering) {
+				Picker("", selection: $vm.learnlist.ordering) {
 					ForEach(Ordering.allCases) {
 						Text($0.rawValue)
 							.tag($0)
@@ -135,21 +163,4 @@ extension ExerciseListView {
 		}
 	}
 	
-}
-
-enum SortBy: String, CaseIterable, Identifiable {
-	var id: String {
-		rawValue
-	}
-	case name
-	case date
-	case custom
-}
-
-enum Ordering: String, CaseIterable, Identifiable {
-	var id: String {
-		rawValue
-	}
-	case ascending
-	case descending
 }

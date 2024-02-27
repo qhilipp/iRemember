@@ -17,21 +17,20 @@ class DivisionViewModel {
 	@ObservationIgnored let generateValue: ([Statistic]) -> Double
 	
 	var completedChartData: [DivisionPart] {
-		[DivisionPart(title: "Moinsen", value: 0)]
-//		Rating.allCases.map { rating in
-//			DivisionPart(
-//				title: rating.rawValue,
-//				value: generateValue(practiceSession.sortedStatistics.filter { $0.correctness.rating == rating })
-//			)
-//		}
+		Rating.allCases.map { rating in
+			DivisionPart(
+				title: rating.rawValue,
+				value: generateValue(practiceSession.sortedStatistics.filter { $0.correctness.rating == rating })
+			)
+		}
 	}
 	
 	var completedChartForegroundStyleScale: KeyValuePairs<String, Color> {
 		[
 			Rating.correct.rawValue: Rating.correct.color,
-			Rating.ok.rawValue: Rating.ok.color,
 			Rating.good.rawValue: Rating.good.color,
-			Rating.correct.rawValue: Rating.correct.color
+			Rating.ok.rawValue: Rating.ok.color,
+			Rating.wrong.rawValue: Rating.wrong.color
 		]
 	}
 	

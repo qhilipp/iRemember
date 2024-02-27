@@ -16,21 +16,28 @@ class IndexCardPracticeViewModel: ExercisePracticeDelegate {
 	var vm: ExercisePracticeViewModel
 	var frontRotation = 0.0
 	var backRotation = 90.0
-	var rating: Rating? = nil
+	var rating: Rating? = nil {
+		didSet {
+			vm.isCtaEnabled = rating != nil || !vm.isRevealed
+		}
+	}
+	let id = UUID()
 	private let durationAndDelay = 0.25
 	
 	init(indexCard: IndexCard, vm: ExercisePracticeViewModel) {
-		self._indexCard = indexCard
-		self._vm = vm
-		self.vm.delegate = self
+		self.indexCard = indexCard
+		self.vm = vm
 	}
 	
-	func flipAnimation() {
-		withAnimation(.linear(duration: durationAndDelay)) {
-			frontRotation = vm.isRevealed ? -90 : 0
-		}
-		withAnimation(.linear(duration: durationAndDelay).delay(durationAndDelay)) {
-			backRotation = vm.isRevealed ? 0 : 90
+	func ctaAction() {
+		if vm.isRevealed {
+			vm.isCtaEnabled = false
+			withAnimation(.linear(duration: durationAndDelay)) {
+				frontRotation = -90
+			}
+			withAnimation(.linear(duration: durationAndDelay).delay(durationAndDelay)) {
+				backRotation = 0
+			}
 		}
 	}
 	

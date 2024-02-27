@@ -11,14 +11,6 @@ struct IndexCardPracticeView: View {
 	
 	@State var vm: IndexCardPracticeViewModel
 	
-	var frontRotation: Double {
-		vm.vm.isRevealed ? 0 : 90
-	}
-	
-	var backRotation: Double {
-		vm.vm.isRevealed ? -90 : 0
-	}
-	
 	init(for indexCard: IndexCard, vm: ExercisePracticeViewModel) {
 		self._vm = State(initialValue: IndexCardPracticeViewModel(indexCard: indexCard, vm: vm))
 	}
@@ -33,7 +25,7 @@ struct IndexCardPracticeView: View {
 					.rotation3DEffect(.degrees(vm.backRotation), axis: (0, 1, 0))
 			}
 			.onChange(of: vm.vm.isRevealed) {
-				vm.flipAnimation()
+				vm.ctaAction()
 			}
 			Spacer()
 			if vm.vm.isRevealed {
@@ -45,6 +37,9 @@ struct IndexCardPracticeView: View {
 			}
 		}
 		.padding(.horizontal)
+		.onAppear {
+			vm.setup()
+		}
     }
 	
 	@ViewBuilder

@@ -21,7 +21,7 @@ struct ExerciseStatisticsView: View {
 				CardScrollView {
 					ReferenceHistoryComparisonView("Score", with: .statistic(vm.statistic, vm.historicalStatistics)) { $0.score }
 					ReferenceHistoryComparisonView("Correctness", with: .statistic(vm.statistic, vm.historicalStatistics)) { $0.correctness }
-//					ReferenceHistoryComparisonView("Time", with: .statistic(vm.statistic, vm.historicalStatistics), greaterIsBetter: false) { $0.timeInformation.totalTime }
+					ReferenceHistoryComparisonView("Time", with: .statistic(vm.statistic, vm.historicalStatistics), greaterIsBetter: false) { $0.timeInformation.totalTime }
 				}
 				CorrelationView(for: .statistic(vm.statistic, vm.historicalStatistics))
 				ActionTimeView(for: vm.statistic)

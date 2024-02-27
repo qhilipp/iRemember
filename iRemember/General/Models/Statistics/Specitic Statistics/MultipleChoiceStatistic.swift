@@ -11,7 +11,7 @@ import SwiftData
 @Model
 final class MultipleChoiceStatistic {
 	
-	@Relationship var multipleChoiceExercise: MultipleChoice! = nil
+	@Relationship var multipleChoice: MultipleChoice! = nil
 	var map: [UUID: Bool] = [:]
 	
 	init() {}

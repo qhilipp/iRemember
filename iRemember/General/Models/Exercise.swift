@@ -34,6 +34,7 @@ final class Exercise: Identifiable, Hashable {
 		
 		set {
 			multipleChoice = nil
+			indexCard = nil
 			switch newValue {
 			case .multipleChoice(let multipleChoice):
 				self.multipleChoice = multipleChoice

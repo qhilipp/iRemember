@@ -12,8 +12,8 @@ struct MultipleChoicePracticeView: View {
 	
 	@State var vm: MultipleChoicePracticeViewModel
 	
-	init(for multipleChoiceExercise: MultipleChoice, vm: ExercisePracticeViewModel) {
-		self._vm = State(initialValue: MultipleChoicePracticeViewModel(for: multipleChoiceExercise, vm: vm))
+	init(for multipleChoice: MultipleChoice, vm: ExercisePracticeViewModel) {
+		self._vm = State(initialValue: MultipleChoicePracticeViewModel(for: multipleChoice, vm: vm))
 	}
 	
 	var body: some View {
@@ -25,12 +25,15 @@ struct MultipleChoicePracticeView: View {
 			.clipShape(.rect(cornerRadius: 10))
 			.padding(.horizontal)
 		}
+		.onAppear {
+			vm.setup()
+		}
 	}
 	
 	@ViewBuilder
 	var header: some View {
-		LabeledImage(vm.multipleChoiceExercise.image, alignment: .top) {
-			Text(vm.multipleChoiceExercise.question)
+		LabeledImage(vm.multipleChoice.image, alignment: .top) {
+			Text(vm.multipleChoice.question)
 				.font(.system(.title, design: .rounded, weight: .heavy))
 			if vm.vm.isRevealed {
 				switch vm.vm.currentStatistic.correctness.rating {
@@ -55,8 +58,8 @@ struct MultipleChoicePracticeView: View {
 	
 	@ViewBuilder
 	var answers: some View {
-		ForEach(vm.multipleChoiceExercise.answers.indices, id: \.self) { i in
-			if let image = vm.multipleChoiceExercise.answers[i].image {
+		ForEach(vm.multipleChoice.answers.indices, id: \.self) { i in
+			if let image = vm.multipleChoice.answers[i].image {
 				LabeledImage(image) {
 					answerContent(at: i)
 						.onTapGesture {
@@ -80,7 +83,7 @@ struct MultipleChoicePracticeView: View {
 		HStack {
 			Toggle(isOn: $vm.guesses[i]) {
 				VStack(alignment: .leading) {
-					Text(vm.multipleChoiceExercise.answers[i].text)
+					Text(vm.multipleChoice.answers[i].text)
 						.multilineTextAlignment(.leading)
 						.font(.system(.title2, design: .rounded, weight: .semibold))
 					if let explanation = vm.explanation(for: i), vm.vm.isRevealed {

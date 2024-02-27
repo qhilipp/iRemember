@@ -41,32 +41,7 @@ struct ExercisePracticeView: View {
 				}
 			}
 			ToolbarItem(placement: .principal) {
-				VStack {
-					Text(vm.currentExercise.name)
-						.bold()
-					if vm.showTimer {
-						HStack(spacing: 0) {
-							if let formattedSessionTimeLeft = vm.formattedSessionTimeLeft {
-								Text(formattedSessionTimeLeft)
-									.foregroundStyle(vm.sessionStopWatch.isTimeMeager ? .red : .secondary)
-							}
-							if vm.hasBothTimeLimitations {
-								Text(" • ")
-									.foregroundStyle(.secondary)
-							}
-							if let formattedExerciseTimeLeft = vm.formattedExerciseTimeLeft {
-								Text(formattedExerciseTimeLeft)
-									.foregroundStyle(vm.exerciseStopWatch.isTimeMeager ? .red : .secondary)
-							}
-						}
-						.font(.footnote)
-					}
-				}
-				.onTapGesture {
-					withAnimation {
-						vm.showTimer.toggle()
-					}
-				}
+				timer
 			}
 		}
 		.sheet(isPresented: $vm.showStatistics) {
@@ -117,6 +92,7 @@ struct ExercisePracticeView: View {
 		}
 		.buttonStyle(.bordered)
 		.tint(.accentColor)
+		.disabled(!vm.isCtaEnabled)
 	}
 	
 	@ViewBuilder
@@ -127,6 +103,36 @@ struct ExercisePracticeView: View {
 			Label("Skip", systemImage: "arrow.forward")
 		}
 		.disabled(!vm.hasNext)
+	}
+	
+	@ViewBuilder
+	var timer: some View {
+		VStack {
+			Text(vm.currentExercise.name)
+				.bold()
+			if vm.showTimer {
+				HStack(spacing: 0) {
+					if let formattedSessionTimeLeft = vm.formattedSessionTimeLeft {
+						Text(formattedSessionTimeLeft)
+							.foregroundStyle(vm.sessionStopWatch.isTimeMeager ? .red : .secondary)
+					}
+					if vm.hasBothTimeLimitations {
+						Text(" • ")
+							.foregroundStyle(.secondary)
+					}
+					if let formattedExerciseTimeLeft = vm.formattedExerciseTimeLeft {
+						Text(formattedExerciseTimeLeft)
+							.foregroundStyle(vm.exerciseStopWatch.isTimeMeager ? .red : .secondary)
+					}
+				}
+				.font(.footnote)
+			}
+		}
+		.onTapGesture {
+			withAnimation {
+				vm.showTimer.toggle()
+			}
+		}
 	}
 	
 }

@@ -1,5 +1,5 @@
 //
-//  ExerciseListViewModel.swift
+//  LearnlistViewModel.swift
 //  iRemember
 //
 //  Created by Privat on 22.07.23.
@@ -10,13 +10,12 @@ import SwiftData
 import SwiftUI
 
 @Observable
-class ExerciseListViewModel {
+class LearnlistViewModel {
 	
 	var learnlist: Learnlist
 	var searchTerm: String = ""
-	var sortBy: SortBy = .date
-	var ordering: Ordering = .ascending
 	var showAddExercise = false
+	var editExercise: Exercise?
 	var showSelectExercises = false
 	var showEdit = false
 	var showInfo = false
@@ -25,9 +24,11 @@ class ExerciseListViewModel {
 	
 	var exerciseResults: [Exercise] {
 		if searchTerm == "" {
-			return learnlist.exercises
+			learnlist.sortedExercises
+		} else {
+			learnlist.sortedExercises
+				.filter { $0.matches(searchTerm: searchTerm) }
 		}
-		return learnlist.exercises.filter { $0.name.contains(searchTerm) }
 	}
 	
 	var formattedTimeLimitation: String? {
@@ -40,6 +41,11 @@ class ExerciseListViewModel {
 	
 	init(learnlist: Learnlist) {
 		self.learnlist = learnlist
+	}
+	
+	func confirmDelete(for exercise: Exercise) {
+		guard let index = learnlist.exercises.firstIndex(of: exercise) else { return }
+		confirmDelete(indexSet: IndexSet(integer: index))
 	}
 	
 	func confirmDelete(indexSet: IndexSet) {

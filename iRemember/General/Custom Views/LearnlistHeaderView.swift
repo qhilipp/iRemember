@@ -39,17 +39,8 @@ struct LearnlistHeaderView: View {
 				}
 				.buttonStyle(.bordered)
 				.tint(.accentColor)
-			} else {
-				ContentUnavailableView {
-					Text("No exercises yet")
-				} actions: {
-					Button {
-//						vm.showAddExercise = true
-					} label: {
-						Label("Add exercise", systemImage: "square.and.pencil")
-					}
-				}
 			}
 		}
+		.frame(maxWidth: .infinity)
     }
 }

@@ -17,8 +17,8 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 	var currentIndex: Int = 0
 	@ObservationIgnored var currentStatistic = Statistic()
 	var scrollProxy: ScrollViewProxy?
+	var isCtaEnabled = true
 	var showStatistics = false
-	
 	var showTimer = true
 	var exerciseStopWatch = StopWatch()
 	var sessionStopWatch = StopWatch()
@@ -87,9 +87,10 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 		showStatistics = true
 	}
 	
-	func next(registerFinishTime: Bool = true) {
-		if registerFinishTime {
+	func next(registerFinishTimeAndCorrectness: Bool = true) {
+		if registerFinishTimeAndCorrectness {
 			currentStatistic.timeInformation.registerFinishTime()
+			currentStatistic.correctness = delegate.evaluateCorrectness()
 		}
 		currentStatistic = Statistic()
 		if hasNext {
@@ -108,12 +109,11 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 		isRevealed = false
 	}
 	
-	func reveal(registerRevealTimeAndCorrectness: Bool = true) {
+	func reveal(registerRevealTime: Bool = true) {
 		GlobalManager.shared.context.insert(currentStatistic)
 		
-		if registerRevealTimeAndCorrectness {
+		if registerRevealTime {
 			currentStatistic.timeInformation.registerRevealTime()
-			currentStatistic.correctness = delegate.evaluateCorrectness()
 		}
 		currentStatistic.exercise = currentExercise
 		
@@ -135,10 +135,10 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 			reveal()
 		}
 		while hasNext {
-			next(registerFinishTime: false )
-			reveal(registerRevealTimeAndCorrectness: false)
+			next(registerFinishTimeAndCorrectness: false )
+			reveal(registerRevealTime: false)
 		}
-		next(registerFinishTime: false)
+		next(registerFinishTimeAndCorrectness: false)
 	}
 	
 	func continueExercise() {
@@ -172,7 +172,15 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 
 protocol ExercisePracticeDelegate {
 	
+	var vm: ExercisePracticeViewModel { get }
 	func attachSpecificStatistic(to statistic: Statistic)
 	func evaluateCorrectness() -> Double
+	func setup()
 	
+}
+
+extension ExercisePracticeDelegate {
+	func setup() {
+		vm.delegate = self
+	}
 }

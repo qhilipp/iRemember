@@ -15,6 +15,7 @@ struct SessionStatisticsView: View {
 
 	init(for practiceSession: PracticeSession) {
 		_vm = State(wrappedValue: SessionStatisticsViewModel(for: practiceSession))
+		print("Moinsen \(practiceSession.exercises.map { $0.name })")
 	}
 	
     var body: some View {
@@ -28,26 +29,16 @@ struct SessionStatisticsView: View {
 				moreButton
 			}
 		}
+		.background(Color(.systemGroupedBackground))
 		.navigationTitle("Statistics")
-		#if os(iOS)
 		.navigationBarTitleDisplayMode(.large)
-		#endif
 		.toolbar {
-			#if os(iOS)
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Done") {
 					GlobalManager.shared.navigationPath.removeLast()
 				}
 				.bold()
 			}
-			#else
-			ToolbarItem {
-				Button("Done") {
-					GlobalManager.shared.navigationPath.removeLast()
-				}
-				.bold()
-			}
-			#endif
 		}
     }
 	
@@ -106,8 +97,8 @@ struct SessionStatisticsView: View {
 				.padding()
 				.foregroundStyle(Color.label)
 				.frame(maxWidth: .infinity)
-				.background(Color.systemGroupedBackground)
-				.clipShape(.rect(cornerRadius: 5))
+				.background(Color(.secondarySystemGroupedBackground))
+				.clipShape(.rect(cornerRadius: 7))
 		}
 		.padding()
 	}

@@ -20,21 +20,24 @@ struct StatisticsCard<Header: View, Content: View>: View {
 	}
 	
     var body: some View {
-		GroupBox {
-			VStack {
-				HStack(alignment: .firstTextBaseline) {
-					Text(title)
-						.lineLimit(3)
-						.font(.system(.largeTitle, design: .rounded, weight: .bold))
-					header()
+		Section {
+			GroupBox {
+				VStack {
+					HStack(alignment: .firstTextBaseline) {
+						Text(title)
+							.lineLimit(3)
+							.font(.system(.largeTitle, design: .rounded, weight: .bold))
+						header()
+					}
+					content()
 				}
-				content()
 			}
+			.ignoreCell()
+			.backgroundStyle(Color(.secondarySystemGroupedBackground))
+			.padding(.horizontal)
+			.containerRelativeFrame(.horizontal)
+			.navigationBarTitleDisplayMode(.inline)
+			.background(Color(.systemGroupedBackground))
 		}
-		.padding(.horizontal)
-		.containerRelativeFrame(.horizontal)
-		#if os(iOS)
-		.navigationBarTitleDisplayMode(.inline)
-		#endif
     }
 }

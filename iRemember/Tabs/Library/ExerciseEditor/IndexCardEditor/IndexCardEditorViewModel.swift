@@ -26,11 +26,7 @@ class IndexCardEditorViewModel: ExerciseEditorDelegate {
 		}
 	}
 	
-	func setup() {
-		vm.delegate = self
-	}
-	
-	func add() {
+	func onComplete() {
 		indexCard.front = front
 		indexCard.back = back
 		vm.exercise.type = .indexCard(indexCard)

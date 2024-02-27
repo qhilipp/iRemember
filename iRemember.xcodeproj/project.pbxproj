@@ -50,7 +50,6 @@
 		A14E63352A7507FD007274AE /* LearnlistEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14E63342A7507FD007274AE /* LearnlistEditorView.swift */; };
 		A14E63372A750806007274AE /* LearnlistEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14E63362A750806007274AE /* LearnlistEditorViewModel.swift */; };
 		A14E63392A750935007274AE /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14E63382A750935007274AE /* PhotoPicker.swift */; };
-		A14E633B2A75B552007274AE /* LearnlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14E633A2A75B552007274AE /* LearnlistViewModel.swift */; };
 		A14E633E2A78EC31007274AE /* LabeledImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14E633D2A78EC31007274AE /* LabeledImage.swift */; };
 		A14E63422A792A51007274AE /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14E63412A792A51007274AE /* DataExtension.swift */; };
 		A14F88A42A80F03F007F4927 /* ExercisePracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F88A32A80F03F007F4927 /* ExercisePracticeViewModel.swift */; };
@@ -75,9 +74,8 @@
 		A1E01FFC2A6BED6200C5599F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E01FFB2A6BED6200C5599F /* Assets.xcassets */; };
 		A1E020242A6BEECA00C5599F /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E020232A6BEECA00C5599F /* Exercise.swift */; };
 		A1E020272A6BEF1C00C5599F /* Learnlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E020262A6BEF1C00C5599F /* Learnlist.swift */; };
-		A1E0202C2A6BF7A900C5599F /* ExerciseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0202B2A6BF7A900C5599F /* ExerciseListView.swift */; };
-		A1E0202E2A6BF7B400C5599F /* ExerciseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0202D2A6BF7B400C5599F /* ExerciseListViewModel.swift */; };
-		A1E020312A6D4BDD00C5599F /* LearnlistListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E020302A6D4BDD00C5599F /* LearnlistListView.swift */; };
+		A1E0202C2A6BF7A900C5599F /* LearnlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0202B2A6BF7A900C5599F /* LearnlistView.swift */; };
+		A1E0202E2A6BF7B400C5599F /* LearnlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0202D2A6BF7B400C5599F /* LearnlistViewModel.swift */; };
 		A1E6BFBD2A719850005E33D0 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6BFBC2A719850005E33D0 /* ViewExtension.swift */; };
 		A1EE75DD2B72C2C600D24C7E /* StatisticInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EE75DC2B72C2C600D24C7E /* StatisticInfoViewModel.swift */; };
 		A1EE75DF2B72C2CF00D24C7E /* StatisticInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EE75DE2B72C2CF00D24C7E /* StatisticInfoView.swift */; };
@@ -133,7 +131,6 @@
 		A14E63342A7507FD007274AE /* LearnlistEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnlistEditorView.swift; sourceTree = "<group>"; };
 		A14E63362A750806007274AE /* LearnlistEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnlistEditorViewModel.swift; sourceTree = "<group>"; };
 		A14E63382A750935007274AE /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
-		A14E633A2A75B552007274AE /* LearnlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnlistViewModel.swift; sourceTree = "<group>"; };
 		A14E633D2A78EC31007274AE /* LabeledImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledImage.swift; sourceTree = "<group>"; };
 		A14E63412A792A51007274AE /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		A14F88A32A80F03F007F4927 /* ExercisePracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePracticeViewModel.swift; sourceTree = "<group>"; };
@@ -160,9 +157,8 @@
 		A1E01FFD2A6BED6200C5599F /* iRemember.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iRemember.entitlements; sourceTree = "<group>"; };
 		A1E020232A6BEECA00C5599F /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		A1E020262A6BEF1C00C5599F /* Learnlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Learnlist.swift; sourceTree = "<group>"; };
-		A1E0202B2A6BF7A900C5599F /* ExerciseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListView.swift; sourceTree = "<group>"; };
-		A1E0202D2A6BF7B400C5599F /* ExerciseListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewModel.swift; sourceTree = "<group>"; };
-		A1E020302A6D4BDD00C5599F /* LearnlistListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnlistListView.swift; sourceTree = "<group>"; };
+		A1E0202B2A6BF7A900C5599F /* LearnlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnlistView.swift; sourceTree = "<group>"; };
+		A1E0202D2A6BF7B400C5599F /* LearnlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnlistViewModel.swift; sourceTree = "<group>"; };
 		A1E6BFBC2A719850005E33D0 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		A1EE75DC2B72C2C600D24C7E /* StatisticInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticInfoViewModel.swift; sourceTree = "<group>"; };
 		A1EE75DE2B72C2CF00D24C7E /* StatisticInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticInfoView.swift; sourceTree = "<group>"; };
@@ -491,10 +487,6 @@
 			children = (
 				A1EE75D92B72C25200D24C7E /* General */,
 				A1E020282A6BF77300C5599F /* Tabs */,
-				A1E6BFBB2A719835005E33D0 /* Extensions */,
-				A10C04D32A73050500E144A7 /* Custom Views */,
-				A1E020222A6BEE9D00C5599F /* Models */,
-				A1EEB0B62AA68C1300F25630 /* Util */,
 				A1E01FF52A6BED6000C5599F /* iRememberApp.swift */,
 				A1E01FF92A6BED6000C5599F /* ContentView.swift */,
 				A1E01FFB2A6BED6200C5599F /* Assets.xcassets */,
@@ -533,7 +525,6 @@
 				A14E63332A7507EB007274AE /* LearnlistEdtior */,
 				A10DE16E2A6F0BAB00A3DA2C /* ExerciseEditor */,
 				A1E0202A2A6BF79400C5599F /* ExerciseList */,
-				A1E0202F2A6D4BC800C5599F /* LearnlistList */,
 				A11A4F982B409B07002B55A6 /* ExerciseSelector */,
 			);
 			path = Library;
@@ -542,19 +533,10 @@
 		A1E0202A2A6BF79400C5599F /* ExerciseList */ = {
 			isa = PBXGroup;
 			children = (
-				A1E0202B2A6BF7A900C5599F /* ExerciseListView.swift */,
-				A1E0202D2A6BF7B400C5599F /* ExerciseListViewModel.swift */,
+				A1E0202B2A6BF7A900C5599F /* LearnlistView.swift */,
+				A1E0202D2A6BF7B400C5599F /* LearnlistViewModel.swift */,
 			);
 			path = ExerciseList;
-			sourceTree = "<group>";
-		};
-		A1E0202F2A6D4BC800C5599F /* LearnlistList */ = {
-			isa = PBXGroup;
-			children = (
-				A1E020302A6D4BDD00C5599F /* LearnlistListView.swift */,
-				A14E633A2A75B552007274AE /* LearnlistViewModel.swift */,
-			);
-			path = LearnlistList;
 			sourceTree = "<group>";
 		};
 		A1E6BFBB2A719835005E33D0 /* Extensions */ = {
@@ -575,6 +557,10 @@
 		A1EE75D92B72C25200D24C7E /* General */ = {
 			isa = PBXGroup;
 			children = (
+				A1EEB0B62AA68C1300F25630 /* Util */,
+				A1E020222A6BEE9D00C5599F /* Models */,
+				A10C04D32A73050500E144A7 /* Custom Views */,
+				A1E6BFBB2A719835005E33D0 /* Extensions */,
 				A1471AC52B47758600CA8AB0 /* Info */,
 			);
 			path = General;
@@ -728,7 +714,6 @@
 				A10DE1762A6F0D7100A3DA2C /* MultipleChoiceEditorViewModel.swift in Sources */,
 				A14F88A42A80F03F007F4927 /* ExercisePracticeViewModel.swift in Sources */,
 				A1E020272A6BEF1C00C5599F /* Learnlist.swift in Sources */,
-				A1E020312A6D4BDD00C5599F /* LearnlistListView.swift in Sources */,
 				A1638D432A8570F3004F9001 /* ReferenceHistoryComparisonViewModel.swift in Sources */,
 				A10DE19B2A7061E900A3DA2C /* MultipleChoicePracticeView.swift in Sources */,
 				A11A4F9C2B409B2C002B55A6 /* ExerciseSelectorView.swift in Sources */,
@@ -738,9 +723,8 @@
 				A1E6BFBD2A719850005E33D0 /* ViewExtension.swift in Sources */,
 				A138B63B2A86D60100D71050 /* DoubleExtension.swift in Sources */,
 				A119BCDB2A82378400B31626 /* Statistic.swift in Sources */,
-				A1E0202C2A6BF7A900C5599F /* ExerciseListView.swift in Sources */,
+				A1E0202C2A6BF7A900C5599F /* LearnlistView.swift in Sources */,
 				A10C04D52A73066A00E144A7 /* FontExtension.swift in Sources */,
-				A14E633B2A75B552007274AE /* LearnlistViewModel.swift in Sources */,
 				A1EEB0BA2AA68D7500F25630 /* FloatingPointExtension.swift in Sources */,
 				A1CDDD372AA6251E00122DE3 /* DistributionViewModel.swift in Sources */,
 				A104C5062ADAD63F0086F581 /* IndexCardEditorView.swift in Sources */,
@@ -752,7 +736,7 @@
 				A1CDDD352AA6251400122DE3 /* DistributionView.swift in Sources */,
 				A10DE1712A6F0BE600A3DA2C /* ExerciseEditorView.swift in Sources */,
 				A1E01FF62A6BED6000C5599F /* iRememberApp.swift in Sources */,
-				A1E0202E2A6BF7B400C5599F /* ExerciseListViewModel.swift in Sources */,
+				A1E0202E2A6BF7B400C5599F /* LearnlistViewModel.swift in Sources */,
 				A1FAD7F62B389B660085B316 /* IndexCardPracticeView.swift in Sources */,
 				A12AD5912AC77A1300D26FF3 /* CorrelationView.swift in Sources */,
 				A12AD5A92ACA04BA00D26FF3 /* LibraryLandingPageViewModel.swift in Sources */,

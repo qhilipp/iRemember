@@ -39,8 +39,8 @@ class PracticeSession {
 		type.exercises
 	}
 	
-	var date: Date? {
-		statistics.first?.timeInformation.date
+	var date: Date {
+		statistics.first?.timeInformation.date ?? Date()
 	}
 	
 	var title: String {
@@ -48,7 +48,7 @@ class PracticeSession {
 		formatter.dateStyle = .medium
 		formatter.timeStyle = .medium
 		
-		let date = if let date { formatter.string(from: date) } else { "Unknown" }
+		let date = formatter.string(from: date)
 		let name = if let learnlist { learnlist.name } else { "Queue" }
 		return "\(name) - \(date)"
 	}
@@ -79,7 +79,7 @@ enum PracticeSessionType {
 	
 	var exercises: [Exercise] {
 		switch self {
-		case .learnlist(let learnlist): learnlist.exercises
+		case .learnlist(let learnlist): learnlist.sortedExercises
 		case .queue(let exercises): exercises
 		}
 	}

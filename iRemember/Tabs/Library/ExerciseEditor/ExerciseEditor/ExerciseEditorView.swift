@@ -90,7 +90,7 @@ struct ExerciseEditorView: View {
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button(vm.isInCreationMode ? "Add" : "Done") {
-					vm.add()
+					vm.complete()
 					dismiss()
 				}
 			}

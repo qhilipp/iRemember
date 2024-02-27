@@ -13,8 +13,8 @@ import SwiftUI
 @Model
 class IndexCard {
 
-	@Relationship(.unique) var front: IndexCardPage! = nil
-	@Relationship(.unique) var back: IndexCardPage! = nil
+	@Relationship var front: IndexCardPage! = nil
+	@Relationship var back: IndexCardPage! = nil
 	
 	init() {}
 	

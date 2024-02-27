@@ -52,9 +52,9 @@ class ExerciseEditorViewModel {
 		}
 	}
 	
-	func add() {
+	func complete() {
 		guard delegate?.hasMissingInformation() == false else { return }
-		delegate?.add()
+		delegate?.onComplete()
 		learnlist?.exercises.append(exercise)
 	}
 	
@@ -70,7 +70,17 @@ class ExerciseEditorViewModel {
 
 protocol ExerciseEditorDelegate {
 	
-	func add()
+	var vm: ExerciseEditorViewModel { get }
+	func onComplete()
 	func hasMissingInformation() -> Bool
+	func setup()
+	
+}
+
+extension ExerciseEditorDelegate {
+	
+	func setup() {
+		vm.delegate = self
+	}
 	
 }
