@@ -13,12 +13,12 @@ struct IndexCardPracticeView: View, ExercisePracticeDelegate {
 	@State var vm: ExercisePracticeViewModel
 	@State var frontRotation = 0.0
 	@State var backRotation = 90.0
-	@State var rating: Rating? = nil //{
-//		didSet {
-//			print("Moinsen IndexCard Rating")
-//			vm.isCtaEnabled = rating != nil
-//		}
-//	}
+	@State var rating: Rating? = nil {
+		didSet {
+			print("Moinsen IndexCard Rating")
+			vm.isCtaEnabled = rating != nil
+		}
+	}
 	
 	init(for indexCard: IndexCard, vm: ExercisePracticeViewModel) {
 		self._indexCard = State(initialValue: indexCard)
