@@ -17,7 +17,7 @@ struct ExerciseStatisticsView: View {
 	
     var body: some View {
 		ScrollView {
-			VStack {
+			LazyVStack {
 				CardScrollView {
 					ReferenceHistoryComparisonView("Score", with: .statistic(vm.statistic, vm.historicalStatistics)) { $0.score }
 					ReferenceHistoryComparisonView("Correctness", with: .statistic(vm.statistic, vm.historicalStatistics)) { $0.correctness }

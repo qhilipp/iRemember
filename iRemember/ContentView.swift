@@ -18,7 +18,7 @@ struct ContentView: View {
 				.tabItem {
 					Label("Library", systemImage: "books.vertical.fill")
 				}
-			Text("Discover")
+			Text("Explore")
 				.tabItem {
 					Label("Explore", systemImage: "square.grid.2x2")
 				}

@@ -8,12 +8,44 @@
 import SwiftUI
 import SwiftData
 
-struct MultipleChoicePracticeView: View {
+struct MultipleChoicePracticeView: View, ExercisePracticeDelegate {
 	
-	@State var vm: MultipleChoicePracticeViewModel
+	@State var vm: ExercisePracticeViewModel
+	@State var multipleChoice: MultipleChoice
+	
+	@State var guesses: [Bool] {
+		willSet {
+			guard newValue != guesses else { return }
+			guard newValue.count == guesses.count, !newValue.isEmpty else { return }
+			var index = 0
+			for i in guesses.indices {
+				if newValue[i] != guesses[i] {
+					index = i
+					break
+				}
+			}
+			vm.currentStatistic.timeInformation.registerActionTime(for: index)
+		}
+	}
+	
+	var correctGuesses: Int {
+		var correctGuesses = 0
+		for i in 0..<guesses.count {
+			if guesses[i] == multipleChoice.answers[i].isCorrect {
+				correctGuesses += 1
+			}
+		}
+		return correctGuesses
+	}
+	
+	var incorrectGuesses: Int {
+		guesses.count - correctGuesses
+	}
 	
 	init(for multipleChoice: MultipleChoice, vm: ExercisePracticeViewModel) {
-		self._vm = State(initialValue: MultipleChoicePracticeViewModel(for: multipleChoice, vm: vm))
+		self._vm = State(initialValue: vm)
+		self.multipleChoice = multipleChoice
+		self.guesses = [Bool].init(repeating: false, count: multipleChoice.answers.count)
 	}
 	
 	var body: some View {
@@ -26,17 +58,17 @@ struct MultipleChoicePracticeView: View {
 			.padding(.horizontal)
 		}
 		.onAppear {
-			vm.setup()
+			vm.delegate = self
 		}
 	}
 	
 	@ViewBuilder
 	var header: some View {
-		LabeledImage(vm.multipleChoice.image, alignment: .top) {
-			Text(vm.multipleChoice.question)
+		LabeledImage(multipleChoice.image, alignment: .top) {
+			Text(multipleChoice.question)
 				.font(.system(.title, design: .rounded, weight: .heavy))
-			if vm.vm.isRevealed {
-				switch vm.vm.currentStatistic.correctness.rating {
+			if vm.isRevealed == true {
+				switch vm.currentStatistic.correctness.rating {
 				case .wrong:
 					Text("Wrong")
 						.foregroundStyle(.secondary)
@@ -45,10 +77,10 @@ struct MultipleChoicePracticeView: View {
 						.gradientForeground()
 				default:
 					HStack(spacing: 0) {
-						Text("\(vm.correctGuesses) correct")
+						Text("\(correctGuesses) correct")
 							.gradientForeground()
 						Text(" • ")
-						Text("\(vm.incorrectGuesses) incorrect")
+						Text("\(incorrectGuesses) incorrect")
 							.foregroundStyle(.secondary)
 					}
 				}
@@ -58,12 +90,12 @@ struct MultipleChoicePracticeView: View {
 	
 	@ViewBuilder
 	var answers: some View {
-		ForEach(vm.multipleChoice.answers.indices, id: \.self) { i in
-			if let image = vm.multipleChoice.answers[i].image {
+		ForEach(multipleChoice.answers.indices, id: \.self) { i in
+			if let image = multipleChoice.answers[i].image {
 				LabeledImage(image) {
 					answerContent(at: i)
 						.onTapGesture {
-							vm.guesses[i].toggle()
+							guesses[i].toggle()
 						}
 				}
 			} else {
@@ -72,7 +104,7 @@ struct MultipleChoicePracticeView: View {
 					.background(Color(.secondarySystemBackground))
 					.rounded()
 					.onTapGesture {
-						vm.guesses[i].toggle()
+						guesses[i].toggle()
 					}
 			}
 		}
@@ -81,12 +113,12 @@ struct MultipleChoicePracticeView: View {
 	@ViewBuilder
 	func answerContent(at i: Int) -> some View {
 		HStack {
-			Toggle(isOn: $vm.guesses[i]) {
+			Toggle(isOn: $guesses[i]) {
 				VStack(alignment: .leading) {
-					Text(vm.multipleChoice.answers[i].text)
+					Text(multipleChoice.answers[i].text)
 						.multilineTextAlignment(.leading)
 						.font(.system(.title2, design: .rounded, weight: .semibold))
-					if let explanation = vm.explanation(for: i), vm.vm.isRevealed {
+					if let explanation = explanation(for: i), vm.isRevealed == true {
 						Text(explanation)
 							.multilineTextAlignment(.leading)
 							.foregroundStyle(.secondary)
@@ -94,15 +126,44 @@ struct MultipleChoicePracticeView: View {
 					}
 				}
 			}
-			.disabled(vm.vm.isRevealed)
-			if vm.vm.isRevealed {
-				Text(vm.guessedCorrectly(i) ? "✅" : "❌")
+			.disabled(vm.isRevealed == true)
+			if vm.isRevealed == true {
+				Text(guessedCorrectly(i) ? "✅" : "❌")
 			}
 		}
 		.onTapGesture {
-			if !vm.vm.isRevealed {
-				vm.guesses[i].toggle()
+			if vm.isRevealed == false {
+				guesses[i].toggle()
 			}
 		}
+	}
+	
+	func guessedCorrectly(_ index: Int) -> Bool {
+		guesses[index] == multipleChoice.answers[index].isCorrect
+	}
+	
+	func explanation(for index: Int) -> String? {
+		let explanation = multipleChoice.answers[index].explanation
+		if explanation == "" {
+			return nil
+		}
+		return explanation
+	}
+	
+	func attachSpecificStatistic(to statistic: Statistic) {
+		let multipleChoiceStatistic = MultipleChoiceStatistic()
+		multipleChoiceStatistic.multipleChoice = multipleChoice
+		
+		GlobalManager.shared.context.insert(multipleChoiceStatistic)
+		
+		statistic.statisticType = .multipleChoice(multipleChoiceStatistic)
+		
+		for i in guesses.indices {
+			multipleChoiceStatistic.map[multipleChoice.answers[i].id] = guesses[i]
+		}
+	}
+	
+	func evaluateCorrectness() -> Double {
+		Double(correctGuesses) / Double(guesses.count)
 	}
 }

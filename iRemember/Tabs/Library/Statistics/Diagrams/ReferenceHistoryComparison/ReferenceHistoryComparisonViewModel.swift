@@ -166,12 +166,10 @@ enum ReferenceType: String, CaseIterable, Identifiable {
 extension ReferenceHistoryComparisonViewModel {
 	
 	struct ChartData: Identifiable {
-		
 		var id: Int { index }
 		let index: Int
 		let value: Double
 		let values: [Double]
-		
 	}
 	
 	struct TableData: Identifiable {

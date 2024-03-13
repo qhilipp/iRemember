@@ -15,12 +15,11 @@ struct SessionStatisticsView: View {
 
 	init(for practiceSession: PracticeSession) {
 		_vm = State(wrappedValue: SessionStatisticsViewModel(for: practiceSession))
-		print("Moinsen \(practiceSession.exercises.map { $0.name })")
 	}
 	
     var body: some View {
 		ScrollView {
-			VStack {
+			LazyVStack {
 				referenceHistoryComparison
 				distribution
 				division

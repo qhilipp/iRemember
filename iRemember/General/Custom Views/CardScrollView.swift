@@ -30,7 +30,7 @@ struct CardScrollView<Content: View, Title: View>: View {
 		VStack(alignment: .leading, spacing: 10) {
 			title()
 			ScrollView(.horizontal) {
-				HStack {
+				LazyHStack {
 					content()
 				}
 				.scrollTargetLayout()

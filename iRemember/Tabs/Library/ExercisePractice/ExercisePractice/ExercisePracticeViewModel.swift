@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import SwiftData
 import Combine
 import SwiftUI
+import Observation
 
 @Observable
 class ExercisePracticeViewModel: StopWatchDelegate {
@@ -17,14 +17,18 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 	var currentIndex: Int = 0
 	@ObservationIgnored var currentStatistic = Statistic()
 	var scrollProxy: ScrollViewProxy?
-	var isCtaEnabled = true
+	var isCtaEnabled = true {
+		didSet {
+			print("Moinsen", isCtaEnabled)
+		}
+	}
 	var showStatistics = false
 	var showTimer = true
 	var exerciseStopWatch = StopWatch()
 	var sessionStopWatch = StopWatch()
 	
 	var isRevealed = false
-	@ObservationIgnored var delegate: ExercisePracticeDelegate!
+	var delegate: ExercisePracticeDelegate!
 	
 	var hasNext: Bool {
 		currentIndex < practiceSession.exercises.count - 1
@@ -106,6 +110,7 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 		} else {
 			openStatistics()
 		}
+		isCtaEnabled = true
 		isRevealed = false
 	}
 	
@@ -175,12 +180,5 @@ protocol ExercisePracticeDelegate {
 	var vm: ExercisePracticeViewModel { get }
 	func attachSpecificStatistic(to statistic: Statistic)
 	func evaluateCorrectness() -> Double
-	func setup()
 	
-}
-
-extension ExercisePracticeDelegate {
-	func setup() {
-		vm.delegate = self
-	}
 }

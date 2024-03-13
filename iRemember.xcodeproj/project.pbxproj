@@ -60,7 +60,6 @@
 		A18180722B73F0D70068F0AC /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18180712B73F0D70068F0AC /* ColorExtension.swift */; };
 		A1905BD12ACC77650035DF72 /* IndexCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1905BD02ACC77650035DF72 /* IndexCard.swift */; };
 		A19318962A8A74050059F0BA /* ExercisePracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19318952A8A74050059F0BA /* ExercisePracticeView.swift */; };
-		A1A17D872A8A5A4E00ED7011 /* MultipleChoicePracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A17D862A8A5A4E00ED7011 /* MultipleChoicePracticeViewModel.swift */; };
 		A1C2D4892A9B8B3C00B0909B /* ExerciseEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2D4882A9B8B3C00B0909B /* ExerciseEditorViewModel.swift */; };
 		A1C2D4982A9D1FCF00B0909B /* TimeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2D4972A9D1FCF00B0909B /* TimeSelector.swift */; };
 		A1CDDD352AA6251400122DE3 /* DistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CDDD342AA6251400122DE3 /* DistributionView.swift */; };
@@ -82,7 +81,6 @@
 		A1EEB0B82AA68C3E00F25630 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB0B72AA68C3E00F25630 /* Styles.swift */; };
 		A1EEB0BA2AA68D7500F25630 /* FloatingPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB0B92AA68D7500F25630 /* FloatingPointExtension.swift */; };
 		A1FAD7F62B389B660085B316 /* IndexCardPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FAD7F52B389B660085B316 /* IndexCardPracticeView.swift */; };
-		A1FAD7F82B389B700085B316 /* IndexCardPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FAD7F72B389B700085B316 /* IndexCardPracticeViewModel.swift */; };
 		A1FAD7FA2B3AE2EE0085B316 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FAD7F92B3AE2EE0085B316 /* Rating.swift */; };
 		A1FB7E4E2B44BD5800815863 /* LearnlistHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FB7E4D2B44BD5800815863 /* LearnlistHeaderView.swift */; };
 		A1FFFA6E2A9E9B5200E1D031 /* PracticeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFFA6D2A9E9B5200E1D031 /* PracticeSession.swift */; };
@@ -141,7 +139,6 @@
 		A18180712B73F0D70068F0AC /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		A1905BD02ACC77650035DF72 /* IndexCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCard.swift; sourceTree = "<group>"; };
 		A19318952A8A74050059F0BA /* ExercisePracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePracticeView.swift; sourceTree = "<group>"; };
-		A1A17D862A8A5A4E00ED7011 /* MultipleChoicePracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoicePracticeViewModel.swift; sourceTree = "<group>"; };
 		A1C2D4882A9B8B3C00B0909B /* ExerciseEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseEditorViewModel.swift; sourceTree = "<group>"; };
 		A1C2D4972A9D1FCF00B0909B /* TimeSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelector.swift; sourceTree = "<group>"; };
 		A1CDDD342AA6251400122DE3 /* DistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributionView.swift; sourceTree = "<group>"; };
@@ -165,7 +162,6 @@
 		A1EEB0B72AA68C3E00F25630 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		A1EEB0B92AA68D7500F25630 /* FloatingPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointExtension.swift; sourceTree = "<group>"; };
 		A1FAD7F52B389B660085B316 /* IndexCardPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardPracticeView.swift; sourceTree = "<group>"; };
-		A1FAD7F72B389B700085B316 /* IndexCardPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexCardPracticeViewModel.swift; sourceTree = "<group>"; };
 		A1FAD7F92B3AE2EE0085B316 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		A1FB7E4D2B44BD5800815863 /* LearnlistHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnlistHeaderView.swift; sourceTree = "<group>"; };
 		A1FFFA6D2A9E9B5200E1D031 /* PracticeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSession.swift; sourceTree = "<group>"; };
@@ -250,7 +246,6 @@
 			isa = PBXGroup;
 			children = (
 				A10DE19A2A7061E900A3DA2C /* MultipleChoicePracticeView.swift */,
-				A1A17D862A8A5A4E00ED7011 /* MultipleChoicePracticeViewModel.swift */,
 			);
 			path = MultipleChoicePractice;
 			sourceTree = "<group>";
@@ -592,7 +587,6 @@
 			isa = PBXGroup;
 			children = (
 				A1FAD7F52B389B660085B316 /* IndexCardPracticeView.swift */,
-				A1FAD7F72B389B700085B316 /* IndexCardPracticeViewModel.swift */,
 			);
 			path = IndexCardPractice;
 			sourceTree = "<group>";
@@ -699,7 +693,6 @@
 				A1083FDC2AAF814200A4CF13 /* StopWatch.swift in Sources */,
 				A1EEB0B82AA68C3E00F25630 /* Styles.swift in Sources */,
 				A104C5082ADAD6480086F581 /* IndexCardEditorViewModel.swift in Sources */,
-				A1A17D872A8A5A4E00ED7011 /* MultipleChoicePracticeViewModel.swift in Sources */,
 				A12AD59C2AC7861500D26FF3 /* ExerciseStatisticsViewModel.swift in Sources */,
 				A12AD59A2AC7860A00D26FF3 /* ExerciseStatisticsView.swift in Sources */,
 				A1FFFA6E2A9E9B5200E1D031 /* PracticeSession.swift in Sources */,
@@ -745,7 +738,6 @@
 				A1DACD752AA0F97D0006F66C /* ArrayExtension.swift in Sources */,
 				A138B63D2A8779CD00D71050 /* RollingText.swift in Sources */,
 				A12AD5972AC77ED200D26FF3 /* Point.swift in Sources */,
-				A1FAD7F82B389B700085B316 /* IndexCardPracticeViewModel.swift in Sources */,
 				A14E63392A750935007274AE /* PhotoPicker.swift in Sources */,
 				A119BCD72A82370B00B31626 /* SessionStatisticsView.swift in Sources */,
 				A1E01FFA2A6BED6000C5599F /* ContentView.swift in Sources */,
