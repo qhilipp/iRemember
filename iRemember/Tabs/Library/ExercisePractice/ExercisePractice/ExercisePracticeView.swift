@@ -21,6 +21,7 @@ struct ExercisePracticeView: View {
 			VStack {
 				content
 					.id(vm.currentExercise.id)
+					.frame(maxHeight: .infinity)
 				ctaButton
 					.disabled(true)
 					.opacity(0)
@@ -48,6 +49,9 @@ struct ExercisePracticeView: View {
 			NavigationStack {
 				SessionStatisticsView(for: vm.practiceSession)
 			}
+		}
+		.sheet(isPresented: $vm.showEditor) {
+			ExerciseEditorView(exercise: vm.currentExercise)
 		}
 		.alert("Time is up", isPresented: $vm.sessionStopWatch.shouldShowTimeRanOutAlert) {
 			Button("Continue") {
@@ -81,9 +85,7 @@ struct ExercisePracticeView: View {
 	@ViewBuilder
 	var ctaButton: some View {
 		Button {
-			withAnimation {
-				vm.ctaClicked()
-			}
+			vm.ctaClicked()
 		} label: {
 			Text(vm.ctaText)
 				.padding()
@@ -103,6 +105,11 @@ struct ExercisePracticeView: View {
 			Label("Skip", systemImage: "arrow.forward")
 		}
 		.disabled(!vm.hasNext)
+		Button {
+			vm.showEditor = true
+		} label: {
+			Label("Edit", systemImage: "pencil")
+		}
 	}
 	
 	@ViewBuilder

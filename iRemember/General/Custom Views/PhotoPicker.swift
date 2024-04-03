@@ -20,9 +20,32 @@ struct PhotoPicker<Content: View>: View {
 	}
 	
     var body: some View {
-		PhotosPicker(selection: $selectedPhotos, maxSelectionCount: 1, matching: .images) {
+		Menu {
+			Section {
+				PhotosPicker(selection: $selectedPhotos, maxSelectionCount: 1, matching: .images) {
+					Label("Select photo", systemImage: "checkmark.circle")
+				}
+				Button {
+					
+				} label: {
+					Label("Take photo", systemImage: "camera")
+				}
+			}
+			if imageData != nil {
+				Section {
+					Button(role: .destructive) {
+						withAnimation {
+							imageData = nil
+						}
+					} label: {
+						Label("Remove image", systemImage: "trash")
+					}
+				}
+			}
+		} label: {
 			content
 		}
+		.buttonStyle(BorderlessButtonStyle())
 		.onChange(of: selectedPhotos) { oldValue, newValue in
 			loadImage()
 		}

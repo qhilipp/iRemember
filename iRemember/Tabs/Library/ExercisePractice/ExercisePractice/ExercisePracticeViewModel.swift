@@ -12,18 +12,15 @@ import Observation
 
 @Observable
 class ExercisePracticeViewModel: StopWatchDelegate {
-
+	
 	var practiceSession: PracticeSession
 	var currentIndex: Int = 0
 	@ObservationIgnored var currentStatistic = Statistic()
 	var scrollProxy: ScrollViewProxy?
-	var isCtaEnabled = true {
-		didSet {
-			print("Moinsen", isCtaEnabled)
-		}
-	}
+	var isCtaEnabled = true
 	var showStatistics = false
 	var showTimer = true
+	var showEditor = false
 	var exerciseStopWatch = StopWatch()
 	var sessionStopWatch = StopWatch()
 	
@@ -94,7 +91,9 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 	func next(registerFinishTimeAndCorrectness: Bool = true) {
 		if registerFinishTimeAndCorrectness {
 			currentStatistic.timeInformation.registerFinishTime()
-			currentStatistic.correctness = delegate.evaluateCorrectness()
+			if let correctness = delegate.evaluateCorrectness() {
+				currentStatistic.correctness = correctness
+			}
 		}
 		currentStatistic = Statistic()
 		if hasNext {
@@ -110,8 +109,10 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 		} else {
 			openStatistics()
 		}
-		isCtaEnabled = true
-		isRevealed = false
+		withAnimation {
+			isCtaEnabled = true
+			isRevealed = false
+		}
 	}
 	
 	func reveal(registerRevealTime: Bool = true) {
@@ -121,13 +122,19 @@ class ExercisePracticeViewModel: StopWatchDelegate {
 			currentStatistic.timeInformation.registerRevealTime()
 		}
 		currentStatistic.exercise = currentExercise
+		if let correctness = delegate.evaluateCorrectness() {
+			currentStatistic.correctness = correctness
+		}
 		
 		delegate.attachSpecificStatistic(to: currentStatistic)
 		practiceSession.register(currentStatistic)
 		
 		scrollProxy?.scrollTo(1, anchor: .top)
 		
-		isRevealed = true
+		withAnimation {
+			isRevealed = true
+		}
+		delegate.revealAction()
 	}
 	
 	func continueSession() {
@@ -179,6 +186,15 @@ protocol ExercisePracticeDelegate {
 	
 	var vm: ExercisePracticeViewModel { get }
 	func attachSpecificStatistic(to statistic: Statistic)
-	func evaluateCorrectness() -> Double
+	func evaluateCorrectness() -> Double?
+	func revealAction()
 	
+}
+
+extension ExercisePracticeDelegate {
+	func evaluateCorrectness() -> Double? {
+		nil
+	}
+	func attachSpecificStatistic(to statistic: Statistic) {}
+	func revealAction() {}
 }

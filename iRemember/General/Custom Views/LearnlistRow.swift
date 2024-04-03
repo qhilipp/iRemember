@@ -16,18 +16,7 @@ struct LearnlistRow: View {
 		CardScrollView(title) {
 			ForEach(learnlists) { learnlist in
 				NavigationLink(value: learnlist) {
-					VStack(alignment: .leading) {
-						Group {
-							if let image = learnlist.image {
-								image
-									.resizable()
-									.aspectRatio(contentMode: .fill)
-							} else {
-								Text("No Image")
-							}
-						}
-						.frame(width: 200, height: 200)
-						.clipShape(.rect(cornerRadius: 10))
+					LabeledImage(learnlist.image, aspectRatio: 1) {
 						Text(learnlist.name)
 							.lineLimit(1)
 							.font(.headline)
@@ -36,7 +25,8 @@ struct LearnlistRow: View {
 							.font(.footnote)
 							.foregroundStyle(.secondary)
 					}
-					.frame(width: 200)
+					.frame(width: 250)
+					.foregroundStyle(.white)
 				}
 				.buttonStyle(PlainButtonStyle())
 			}

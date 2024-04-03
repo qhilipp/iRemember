@@ -31,7 +31,7 @@ struct IndexCardEditorView: View {
 	
 	@ViewBuilder
 	func indexCardPageEditor(for page: Binding<IndexCardPage>) -> some View {
-		LabeledImage(page.wrappedValue.image, contract: false) {
+		LabeledImage(page.wrappedValue.image) {
 			HStack(alignment: .center) {
 				TextField("Text", text: page.text, axis: .vertical)
 				PhotoPicker(page.imageData) {

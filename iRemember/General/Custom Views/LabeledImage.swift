@@ -10,38 +10,55 @@ import SwiftUI
 struct LabeledImage<Content: View>: View {
 	
 	var image: Image?
-	var alignment: TopOrBottomAlignment
-	var contract: Bool
+	var aspectRatio: CGFloat
+	var hideContent: Bool
 	var content: () -> Content
 	
-	init(_ image: Image?, alignment: TopOrBottomAlignment = .bottom, contract: Bool = true, @ViewBuilder content: @escaping () -> Content) {
+	init(_ image: Image?, aspectRatio: CGFloat = 4/3, hideContent: Bool = false, @ViewBuilder content: @escaping () -> Content) {
 		self.image = image
-		self.alignment = alignment
-		self.contract = contract
+		self.aspectRatio = aspectRatio
+		self.hideContent = hideContent
 		self.content = content
 	}
 	
     var body: some View {
 		if let image {
-			ZStack(alignment: alignment.alignment) {
-				image
-					.optionalModifier(contract) { view in
-						view
+			ZStack(alignment: .bottom) {
+				Color.clear
+					.overlay {
+						image
 							.resizable()
-							.aspectRatio(4/3, contentMode: .fill)
-							.frame(maxWidth: .infinity)
+							.aspectRatio(contentMode: .fill)
 					}
-				VStack {
-					content()
-						.optionalModifier(!contract) { view in
-							view
-								.aspectRatio(4/3, contentMode: .fill)
-								.frame(maxWidth: .infinity)
-						}
+					.aspectRatio(aspectRatio, contentMode: .fit)
+				if !hideContent {
+					VStack(alignment: .leading) {
+						content()
+					}
+					.textFieldStyle(.ultraThin)
+					.frame(maxWidth: .infinity, alignment: .leading)
+					.padding([.horizontal, .bottom])
+					.padding(.top, 35)
+					.background {
+						Rectangle()
+							.fill(.ultraThinMaterial)
+							.mask {
+								VStack(spacing: 0) {
+									LinearGradient(
+										colors: [
+											.black,
+											.black.opacity(0.75),
+											.clear
+										],
+										startPoint: .bottom,
+										endPoint: .top
+									)
+									.frame(height: 50)
+									Rectangle()
+								}
+							}
+					}
 				}
-				.padding()
-				.frame(maxWidth: .infinity)
-				.background(.thinMaterial)
 			}
 			.rounded()
 			.ignoreCell()
@@ -52,30 +69,4 @@ struct LabeledImage<Content: View>: View {
 		}
     }
 	
-}
-
-enum TopOrBottomAlignment {
-	case top
-	case bottom
-	
-	var reversed: TopOrBottomAlignment {
-		switch self {
-		case .top: .bottom
-		case .bottom: .top
-		}
-	}
-	
-	var alignment: Alignment {
-		switch self {
-		case .top: .top
-		case .bottom: .bottom
-		}
-	}
-	
-	var edgeSet: Edge.Set {
-		switch self {
-		case .top: .top
-		case .bottom: .bottom
-		}
-	}
 }

@@ -10,19 +10,18 @@ import SwiftUI
 struct IndexCardPracticeView: View, ExercisePracticeDelegate {
 
 	@State var indexCard: IndexCard
-	@State var vm: ExercisePracticeViewModel
+	var vm: ExercisePracticeViewModel
 	@State var frontRotation = 0.0
 	@State var backRotation = 90.0
 	@State var rating: Rating? = nil {
 		didSet {
-			print("Moinsen IndexCard Rating")
 			vm.isCtaEnabled = rating != nil
 		}
 	}
 	
 	init(for indexCard: IndexCard, vm: ExercisePracticeViewModel) {
 		self._indexCard = State(initialValue: indexCard)
-		self._vm = State(initialValue: vm)
+		self.vm = vm
 	}
 	
     var body: some View {
@@ -33,9 +32,6 @@ struct IndexCardPracticeView: View, ExercisePracticeDelegate {
 					.rotation3DEffect(.degrees(frontRotation), axis: (0, 1, 0))
 				indexCardPracticeView(for: indexCard.back)
 					.rotation3DEffect(.degrees(backRotation), axis: (0, 1, 0))
-			}
-			.onChange(of: vm.isRevealed) {
-				ctaAction()
 			}
 			Spacer()
 			if vm.isRevealed {
@@ -76,17 +72,28 @@ struct IndexCardPracticeView: View, ExercisePracticeDelegate {
 	
 	@ViewBuilder
 	func indexCardPracticeView(for page: IndexCardPage) -> some View {
-		Text(page.text)
-			.font(.title)
-			.padding()
-			.frame(maxWidth: .infinity, minHeight: 250)
-			.background(Color(.secondarySystemFill))
-			.clipShape(.rect(cornerRadius: 10))
+		if let image = page.image {
+			LabeledImage(image, hideContent: page.text.isEmpty) {
+				Text(page.text).lineLimit(2)
+			}
+		} else {
+			ZStack {
+				Color(uiColor: .secondarySystemFill)
+					.overlay {
+						Image(systemName: "rectangle.fill")
+							.resizable()
+							.aspectRatio(contentMode: .fill)
+							.hidden()
+					}
+					.aspectRatio(4/3, contentMode: .fit)
+				Text(page.text)
+			}
+			.rounded()
+		}
 	}
 	
-	func ctaAction() {
+	func revealAction() {
 		let durationAndDelay = 0.25
-		print("Moinsen IndexCard ctaAction")
 		if vm.isRevealed == true {
 			vm.isCtaEnabled = false
 			withAnimation(.linear(duration: durationAndDelay)) {
@@ -97,11 +104,4 @@ struct IndexCardPracticeView: View, ExercisePracticeDelegate {
 			}
 		}
 	}
-	
-	func attachSpecificStatistic(to statistic: Statistic) {}
-	
-	func evaluateCorrectness() -> Double {
-		0
-	}
-	
 }

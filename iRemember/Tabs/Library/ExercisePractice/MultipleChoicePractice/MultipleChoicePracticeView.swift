@@ -10,7 +10,7 @@ import SwiftData
 
 struct MultipleChoicePracticeView: View, ExercisePracticeDelegate {
 	
-	@State var vm: ExercisePracticeViewModel
+	var vm: ExercisePracticeViewModel
 	@State var multipleChoice: MultipleChoice
 	
 	@State var guesses: [Bool] {
@@ -43,7 +43,7 @@ struct MultipleChoicePracticeView: View, ExercisePracticeDelegate {
 	}
 	
 	init(for multipleChoice: MultipleChoice, vm: ExercisePracticeViewModel) {
-		self._vm = State(initialValue: vm)
+		self.vm = vm
 		self.multipleChoice = multipleChoice
 		self.guesses = [Bool].init(repeating: false, count: multipleChoice.answers.count)
 	}
@@ -64,7 +64,7 @@ struct MultipleChoicePracticeView: View, ExercisePracticeDelegate {
 	
 	@ViewBuilder
 	var header: some View {
-		LabeledImage(multipleChoice.image, alignment: .top) {
+		LabeledImage(multipleChoice.image) {
 			Text(multipleChoice.question)
 				.font(.system(.title, design: .rounded, weight: .heavy))
 			if vm.isRevealed == true {
@@ -128,7 +128,7 @@ struct MultipleChoicePracticeView: View, ExercisePracticeDelegate {
 			}
 			.disabled(vm.isRevealed == true)
 			if vm.isRevealed == true {
-				Text(guessedCorrectly(i) ? "✅" : "❌")
+				Text(multipleChoice.answers[i].isCorrect ? "✅" : "❌")
 			}
 		}
 		.onTapGesture {
@@ -136,10 +136,6 @@ struct MultipleChoicePracticeView: View, ExercisePracticeDelegate {
 				guesses[i].toggle()
 			}
 		}
-	}
-	
-	func guessedCorrectly(_ index: Int) -> Bool {
-		guesses[index] == multipleChoice.answers[index].isCorrect
 	}
 	
 	func explanation(for index: Int) -> String? {
@@ -163,7 +159,7 @@ struct MultipleChoicePracticeView: View, ExercisePracticeDelegate {
 		}
 	}
 	
-	func evaluateCorrectness() -> Double {
+	func evaluateCorrectness() -> Double? {
 		Double(correctGuesses) / Double(guesses.count)
 	}
 }
