@@ -237,7 +237,7 @@
 		A119BCD52A8236F600B31626 /* SessionStatistics */ = {
 			isa = PBXGroup;
 			children = (
-				A1638D3F2A8570C1004F9001 /* AttributeHistoryComparision */,
+				A1638D3F2A8570C1004F9001 /* AttributeHistoryComparison */,
 				A119BCD62A82370B00B31626 /* SessionStatisticsView.swift */,
 				A119BCD82A82372700B31626 /* SessionStatisticsViewModel.swift */,
 			);
@@ -270,13 +270,13 @@
 			path = ExercisePracticeWireframe;
 			sourceTree = "<group>";
 		};
-		A1638D3F2A8570C1004F9001 /* AttributeHistoryComparision */ = {
+		A1638D3F2A8570C1004F9001 /* AttributeHistoryComparison */ = {
 			isa = PBXGroup;
 			children = (
 				A1638D402A8570DD004F9001 /* AttributeHistoryComparisionView.swift */,
 				A1638D422A8570F3004F9001 /* AttributeHistoryComparisionViewModel.swift */,
 			);
-			path = AttributeHistoryComparision;
+			path = AttributeHistoryComparison;
 			sourceTree = "<group>";
 		};
 		A1E01FE92A6BED6000C5599F = {

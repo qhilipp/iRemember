@@ -1,5 +1,5 @@
 //
-//  AttributeHistoryComparisionView.swift
+//  AttributeHistoryComparisonView.swift
 //  iRemember
 //
 //  Created by Privat on 10.08.23.
@@ -8,13 +8,13 @@
 import SwiftUI
 import Charts
 
-struct AttributeHistoryComparisionView: View {
+struct AttributeHistoryComparisonView: View {
 	
 	@Environment(\.modelContext) var context
-	@State var vm: AttributeHistoryComparisionViewModel
+	@State var vm: AttributeHistoryComparisonViewModel
 
 	init(_ name: String, for session: SessionStatistic, extractValue: @escaping (Statistic) -> Double, display: ((Double) -> String)? = nil) {
-		_vm = State(initialValue: AttributeHistoryComparisionViewModel(name, for: session, extractValue: extractValue, display: display))
+		_vm = State(initialValue: AttributeHistoryComparisonViewModel(name, for: session, extractValue: extractValue, display: display))
 	}
 	
     var body: some View {

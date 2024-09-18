@@ -1,5 +1,5 @@
 //
-//  AttributeHistoryComparisionViewModel.swift
+//  AttributeHistoryComparisonViewModel.swift
 //  iRemember
 //
 //  Created by Privat on 10.08.23.
@@ -10,7 +10,7 @@ import SwiftData
 import Charts
 
 @Observable
-class AttributeHistoryComparisionViewModel {
+class AttributeHistoryComparisonViewModel {
 	
 	var context: ModelContext!
 	

@@ -21,13 +21,13 @@ struct SessionStatisticsView: View {
 				VStack {
 					ScrollView(.horizontal) {
 						HStack(spacing: 0) {
-							AttributeHistoryComparisionView("Score", for: vm.sessionStatistic) { statistic in
+							AttributeHistoryComparisonView("Score", for: vm.sessionStatistic) { statistic in
 								statistic.score
 							}
-							AttributeHistoryComparisionView("Time", for: vm.sessionStatistic) { statistic in
+							AttributeHistoryComparisonView("Time", for: vm.sessionStatistic) { statistic in
 								statistic.time
 							}
-							AttributeHistoryComparisionView("Score/Time", for: vm.sessionStatistic) { statistic in
+							AttributeHistoryComparisonView("Score/Time", for: vm.sessionStatistic) { statistic in
 								statistic.score / statistic.time
 							}
 						}
