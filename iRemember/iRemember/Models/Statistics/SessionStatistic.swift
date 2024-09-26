@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class SessionStatistic {
 	
-	@Relationship var stats: [Statistic]
+	@Relationship var stats: [Statistic] = []
 	var time: TimeInterval
 	
 	var avgScore: Double {

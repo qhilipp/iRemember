@@ -14,7 +14,7 @@ class Exercise: Identifiable, Hashable {
 	@Attribute(.unique) var id: UUID
 	var name: String
 	var creationDate: Date
-	@Relationship(.cascade) var mcExercise: MultipleChoiceExercise?
+	@Relationship var mcExercise: MultipleChoiceExercise?
 
 	var exerciseType: ExerciseType {
 		get {

@@ -47,10 +47,8 @@ class ExercisePracticeWireframeViewModel {
 	}
 	
 	func reveal() {
-		let statistic = Statistic(startedOn: startTime)
+		let statistic = Statistic(for: exercise, startedOn: startTime)
 		context.insert(statistic)
-		
-		statistic.exercise = exercise
 		
 		self.statistic = statistic
 		revealAction(statistic)

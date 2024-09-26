@@ -17,9 +17,9 @@ class MultipleChoiceExercise {
 	@Relationship var exercise: Exercise
 	@Relationship var answers: [MultipleChoiceAnswer] = []
 	@Relationship var statistics: [MultipleChoiceStatistic] = []
-	@Attribute(.externalStorage) var imageData: Data?
+	@Attribute(.externalStorage) var imageData: Data? = nil
 	@Transient var lastHash: Int = 0
-	@Transient private var imageCache: Image?
+	@Transient private var imageCache: Image? = nil
 	
 	var image: Image? {
 		get {
@@ -34,7 +34,8 @@ class MultipleChoiceExercise {
 		}
 	}
 	
-	init(question: String) {
+	init(exercise: Exercise, question: String) {
+		self.exercise = exercise
 		self.question = question
 	}
 	

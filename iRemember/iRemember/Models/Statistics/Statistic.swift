@@ -15,14 +15,15 @@ class Statistic: Identifiable, Hashable {
 	@Relationship var exercise: Exercise
 	var date: Date
 	var time: TimeInterval
-	@Relationship var mcStatistic: MultipleChoiceStatistic?
+	@Relationship var mcStatistic: MultipleChoiceStatistic? = nil
 	
 	var score: Double {
 		time
 	}
 	
-	init(startedOn startDate: Date) {
+	init(for exercise: Exercise, startedOn startDate: Date) {
 		self.id = UUID()
+		self.exercise = exercise
 		self.date = .now
 		self.time = Date.now.timeIntervalSince(startDate)
 	}

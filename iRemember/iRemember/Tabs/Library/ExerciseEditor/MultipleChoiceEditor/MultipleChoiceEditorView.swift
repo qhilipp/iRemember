@@ -12,11 +12,14 @@ import PhotosUI
 struct MultipleChoiceEditorView: View {
 	
 	@Environment(\.modelContext) var context: ModelContext
-	@State var vm = MultipleChoiceEditorViewModel()
+	@State var vm: MultipleChoiceEditorViewModel
 	@FocusState var focus: Int?
 	let dismissAction: DismissAction
-	
-	var exercise: Exercise
+		
+	init(dismissAction: DismissAction, exercise: Exercise) {
+		self.dismissAction = dismissAction
+		vm = MultipleChoiceEditorViewModel(exercise: exercise)
+	}
 	
     var body: some View {
 		ScrollViewReader { p in
@@ -64,7 +67,6 @@ struct MultipleChoiceEditorView: View {
 			}
 		}
 		.onAppear {
-			vm.initialize(exercise: exercise, context: context)
 			focus = 0
 		}
     }

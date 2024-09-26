@@ -15,8 +15,8 @@ import Combine
 class MultipleChoiceEditorViewModel {
 	
 	var exercise: Exercise!
-	var mcExercise = MultipleChoiceExercise(question: "")
-	var context: ModelContext!
+	var mcExercise: MultipleChoiceExercise
+//	var context: ModelContext!
 	var answers: [MultipleChoiceAnswer] = []
 	
 	var canAdd: Bool {
@@ -31,10 +31,10 @@ class MultipleChoiceEditorViewModel {
 		return true
 	}
 	
-	func initialize(exercise: Exercise, context: ModelContext) {
+	init(exercise: Exercise) {
 		self.exercise = exercise
-		self.context = context
-//		context.insert(mcExercise)
+//		self.context = context
+		mcExercise = MultipleChoiceExercise(exercise: exercise, question: "")
 		mcExercise.question = exercise.name
 		addAnswer()
 	}
