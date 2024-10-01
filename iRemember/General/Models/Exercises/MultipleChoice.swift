@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 import Combine
-import ImageCacheMacro
+import ImageCache
 
 @Model
 final class MultipleChoice {

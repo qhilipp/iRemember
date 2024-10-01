@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftData
-import ImageCacheMacro
+import ImageCache
 import SwiftUI
 
 @Model

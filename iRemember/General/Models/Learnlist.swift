@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 import SwiftUI
-import ImageCacheMacro
+import ImageCache
 
 struct Test {
 	var containmentRule: ((Exercise) -> Bool)?

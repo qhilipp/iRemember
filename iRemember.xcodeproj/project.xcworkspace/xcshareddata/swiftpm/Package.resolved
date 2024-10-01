@@ -1,14 +1,24 @@
 {
+  "originHash" : "62eb1372435126fba2019fa2aad3f13f7e1053d0845a1acbd9ef07803fda7aba",
   "pins" : [
+    {
+      "identity" : "imagecache",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:qhilipp/ImageCache.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3f08fc8b80bed70493e7b991604ac25e526e30cd"
+      }
+    },
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
       "state" : {
-        "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
-        "version" : "509.0.0"
+        "revision" : "0687f71944021d616d34d922343dcef086855920",
+        "version" : "600.0.1"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

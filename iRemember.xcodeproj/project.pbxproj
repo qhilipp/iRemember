@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		175BB8282CAC78F2009307AD /* ImageCache in Frameworks */ = {isa = PBXBuildFile; productRef = 175BB8272CAC78F2009307AD /* ImageCache */; };
 		A1025B542B3F71E300CA4B00 /* AllModelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1025B532B3F71E300CA4B00 /* AllModelsView.swift */; };
-		A104C4E92ADAA7F70086F581 /* ImageCacheMacro in Frameworks */ = {isa = PBXBuildFile; productRef = A104C4E82ADAA7F70086F581 /* ImageCacheMacro */; };
 		A104C5062ADAD63F0086F581 /* IndexCardEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104C5052ADAD63F0086F581 /* IndexCardEditorView.swift */; };
 		A104C5082ADAD6480086F581 /* IndexCardEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104C5072ADAD6480086F581 /* IndexCardEditorViewModel.swift */; };
 		A1083FDC2AAF814200A4CF13 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1083FDB2AAF814200A4CF13 /* StopWatch.swift */; };
@@ -174,7 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A104C4E92ADAA7F70086F581 /* ImageCacheMacro in Frameworks */,
+				175BB8282CAC78F2009307AD /* ImageCache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,7 +611,7 @@
 			);
 			name = iRemember;
 			packageProductDependencies = (
-				A104C4E82ADAA7F70086F581 /* ImageCacheMacro */,
+				175BB8272CAC78F2009307AD /* ImageCache */,
 			);
 			productName = iRemember;
 			productReference = A1E01FF22A6BED6000C5599F /* iRemember.app */;
@@ -642,7 +642,7 @@
 			);
 			mainGroup = A1E01FE92A6BED6000C5599F;
 			packageReferences = (
-				A104C4E72ADAA7F70086F581 /* XCLocalSwiftPackageReference "../ImageCacheMacro" */,
+				175BB8262CAC78F2009307AD /* XCRemoteSwiftPackageReference "ImageCache" */,
 			);
 			productRefGroup = A1E01FF32A6BED6000C5599F /* Products */;
 			projectDirPath = "";
@@ -964,17 +964,22 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		A104C4E72ADAA7F70086F581 /* XCLocalSwiftPackageReference "../ImageCacheMacro" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../ImageCacheMacro;
+/* Begin XCRemoteSwiftPackageReference section */
+		175BB8262CAC78F2009307AD /* XCRemoteSwiftPackageReference "ImageCache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:qhilipp/ImageCache.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A104C4E82ADAA7F70086F581 /* ImageCacheMacro */ = {
+		175BB8272CAC78F2009307AD /* ImageCache */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = ImageCacheMacro;
+			package = 175BB8262CAC78F2009307AD /* XCRemoteSwiftPackageReference "ImageCache" */;
+			productName = ImageCache;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
